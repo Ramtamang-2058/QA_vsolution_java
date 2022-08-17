@@ -141,7 +141,7 @@ if((request.getSession(false).getAttribute("User")== null) )
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="<%=request.getContextPath()%>/QuestionServlet">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>New Questions</span></a>
             </li>

@@ -20,6 +20,10 @@
         <servlet-name>UserHome</servlet-name>
         <servlet-class>com.view.UserHome</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionServlet</servlet-name>
+        <servlet-class>com.view.QuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -41,8 +45,12 @@
         <url-pattern>/UserHome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/static/*</url-pattern>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionServlet</servlet-name>
+        <url-pattern>/QuestionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
