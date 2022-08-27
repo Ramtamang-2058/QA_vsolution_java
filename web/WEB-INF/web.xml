@@ -24,6 +24,10 @@
         <servlet-name>QuestionServlet</servlet-name>
         <servlet-class>com.view.QuestionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AnswerServlet</servlet-name>
+        <servlet-class>com.view.AnswerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -51,6 +55,12 @@
     <servlet-mapping>
         <servlet-name>QuestionServlet</servlet-name>
         <url-pattern>/QuestionServlet</url-pattern>
+        <url-pattern>/new</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnswerServlet</servlet-name>
+        <url-pattern>/AnswerServlet</url-pattern>
+        <url-pattern>/viewAnswer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
