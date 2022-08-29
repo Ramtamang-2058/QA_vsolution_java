@@ -10,12 +10,21 @@ import com.model.Category;
 import com.model.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 import java.io.File;
 import javax.servlet.http.Part;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.Part;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +35,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ram
  */
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, //2mb
+        maxFileSize = 1024 * 1024 * 10, //10mb
+        maxRequestSize = 1024 * 1024 * 50)
+
+
 public class QuestionServlet extends HttpServlet {
 
     private QuestionDao questionDao;
@@ -37,13 +52,11 @@ public class QuestionServlet extends HttpServlet {
         categoryDao = new CategoryDao();
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
@@ -72,6 +85,8 @@ public class QuestionServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(QuestionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +105,7 @@ public class QuestionServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List< Category> listCategory = categoryDao.selectAllCategories();
         request.setAttribute("listCategory", listCategory);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("new-questions.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/new-questions.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -105,36 +120,28 @@ public class QuestionServlet extends HttpServlet {
     }
     private void insertQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+        try{
+        Date created_date = new Date(System.currentTimeMillis());
+        Date edited_date = new Date(System.currentTimeMillis());
         String text = request.getParameter("name");
-        String image = request.getParameter("image");
-        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        String image = request.getParameter("image");  
+        int category_id = Integer.parseInt(request.getParameter("categ"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
-        try {
-                    Part pic_part = null;
-                    pic_part = request.getPart("cover_photo");
-                    //String fileName = validateVendor.extractFileName(pic_part);
-                    String fileName = bookname + "-vendor" + vendor_id + ".png";
-                    //String contextPath = request.getContextPath();
-                    String contextPath = new File("").getAbsolutePath();
-                    System.out.println("Context Path: " + contextPath);
-                    String imageSavePath = "\\web\\images\\book_cover_photos" + File.separator + fileName;
-                    File fileSaveDir = new File(imageSavePath);
-                    pic_part.write(imageSavePath + File.separator);
-        }catch (Exception e) {
-                    System.out.println(e);
-        }
-        Question newQuestion = new Question(text, image, category_id, created_by_id);
+        Question newQuestion = new Question(text, image, created_date, edited_date, category_id, created_by_id);
         questionDao.insertQuestion(newQuestion);
         response.sendRedirect("list");
+        }catch(Exception e){
+            System.out.println("e");
+        }
     }
 
     private void updateQuestion(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ParseException {
         int id = Integer.parseInt(request.getParameter("id"));
         String text = request.getParameter("question");
         String image = request.getParameter("image");
-        String created_date = request.getParameter("created_date");
-        String edited_date = request.getParameter("edited_date");
+        Date created_date = new Date(System.currentTimeMillis());
+        Date edited_date = new Date(System.currentTimeMillis());
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
 
@@ -150,4 +157,14 @@ public class QuestionServlet extends HttpServlet {
         response.sendRedirect("list");
 
     }
+    static String RandGeneratedStr(){
+        char[] chars = "abcdefghijklmnopqrstuvwxyzABSDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+        Random r = new Random(System.currentTimeMillis());
+        char[]id = new char[8];
+        for (int i = 0;  i < 8;  i++) {
+            id[i] = chars[r.nextInt(chars.length)];
+        }
+        return new String(id);
+    }
 }
+

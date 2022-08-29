@@ -70,7 +70,7 @@
                             <form action="update" method="post">
                         </c:if>
                         <c:if test="${question == null}">
-                            <form action="insert" method="post">
+                            <form action="insert" method="post" enctype="multipart/form-data">
                         </c:if>
                         <c:if test="${quesiton != null}">
                             
@@ -81,28 +81,28 @@
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Image</label> <input type="text" value="<c:out value='${question.image}' />" class="form-control" name="image">
+                            <label>Image</label><input name="photo" id="dropzone-file" type="file"/>
                         </fieldset>
+                        <c:if test="${question != null}">
                         <fieldset class="form-group">
-                            <label>Created Date</label> <input type="text" value="<c:out value='${question.created_date}' />" class="form-control" name="created_date">
+                            <label>Created Date</label> <input type="text" value="<c:out value='et>${question.created_date}' />" class="form-control" name="created_date">
                         </fieldset>
 
                         <fieldset class="form-group">
                             <label>Modified Date</label> <input type="text" value="<c:out value='${question.edited_date}' />" class="form-control" name="edited_date">
                         </fieldset>
-
-                        <fieldset class="form-group">
-                            <label>Category</label> <input type="select" value="<c:out value='${question.category}' />" class="form-control" name="category_id">
-                        </fieldset>
+                         </c:if>
                         <fieldset class="form-group">
                             <label>Created by</label> <input type="text" value="<c:out value='${question.created_by}' />" class="form-control" name="created_by_id">
                         </fieldset>
-
+                        <fieldset class="form-group">
+                            <label>image</label> <input type="text" value="<c:out value='${question.created_by}' />" class="form-control" name="image">
+                        </fieldset>
                         <fieldset class="form-group">
                             <label>Category</label>
-                            <select id="cars" name="category_id" value="<c:out value='${question.category}' />" form="carform">
+                            <select name="categ">
                             <c:forEach var="categry" items="${listCategory}">
-                                <option value="<c:out value='${categry.id}' />"><c:out value="${categry.name}" /></option>
+                                <option name ="categ" value="${categry.id}">${categry.name}</option>
                             </c:forEach>
                           </select>
                         </fieldset>

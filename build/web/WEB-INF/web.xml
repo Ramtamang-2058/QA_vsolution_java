@@ -56,6 +56,7 @@
         <servlet-name>QuestionServlet</servlet-name>
         <url-pattern>/QuestionServlet</url-pattern>
         <url-pattern>/new</url-pattern>
+        <url-pattern>/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnswerServlet</servlet-name>

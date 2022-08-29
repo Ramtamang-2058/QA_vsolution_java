@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 /**
  *
  * @author ram
@@ -22,8 +23,8 @@ public class QuestionDao {
     private String user = "root";
     private String password = "mynewpassword";
 
-     private static final String INSERT_QUESTIONS_SQL = "INSERT INTO vsolution_question" + "  (question, image, category_id, created_by_id) VALUES " +
-        " (?, ?, ?, ?);";
+     private static final String INSERT_QUESTIONS_SQL = "INSERT INTO vsolution_question" + "  (question, image, created_date, edited_date, category_id, created_by_id) VALUES " +
+        " (?, ?, ?, ?, ?, ?);";
 
     private static final String SELECT_QUESTIONS_BY_ID = "select id, question, image, created_date, edited_date, category_id, created_by_id from vsolution_question where id =?;";
     private static final String SELECT_ALL_QUESTIONS = "select * from vsolution_question";
@@ -51,8 +52,11 @@ public class QuestionDao {
         ){
             preparedStatement.setString(1, question.getQuestion());
             preparedStatement.setString(2, question.getImage());
-            preparedStatement.setInt(2, question.getCreated_by());
-            preparedStatement.setInt(4, question.getCategory());
+            preparedStatement.setDate(3, question.getCreated_date());
+            preparedStatement.setDate(4, question.getEdited_date());
+            preparedStatement.setInt(5, question.getCategory());
+            preparedStatement.setInt(6, question.getCreated_by());
+            preparedStatement.executeUpdate();
             
 
         }catch (SQLException e) {
@@ -74,8 +78,8 @@ public class QuestionDao {
             while (rs.next()) {
                 String text = rs.getString("question");
                 String image = rs.getString("image");
-                String created_date = rs.getString("created_date");
-                String edited_date = rs.getString("edited_Date");
+                Date created_date = rs.getDate("created_date");
+                Date edited_date = rs.getDate("edited_Date");
                 int category_id = rs.getInt("category_id");
                 int created_by_id = rs.getInt("created_by_id");
                 question = new Question(id, text, image, created_date, edited_date, category_id, created_by_id);
@@ -104,8 +108,8 @@ public class QuestionDao {
                 int id = rs.getInt("id");
                 String text = rs.getString("question");
                 String image = rs.getString("image");
-                String created_date = rs.getString("created_date");
-                String edited_date = rs.getString("edited_Date");
+                Date created_date = rs.getDate("created_date");
+                Date edited_date = rs.getDate("edited_Date");
                 int category_id = rs.getInt("category_id");
                 int created_by_id = rs.getInt("created_by_id");
                 questions.add(new Question(id, text, image, created_date, edited_date, category_id, created_by_id));
@@ -131,8 +135,8 @@ public class QuestionDao {
             PreparedStatement statement = connection.prepareStatement(UPDATE_QUESTIONS_SQL);) {
             statement.setString(1, question.getQuestion());
             statement.setString(2, question.getImage());
-            statement.setString(3, question.getCreated_date());
-            statement.setString(4, question.getEdited_date());
+            statement.setDate(3, question.getCreated_date());
+            statement.setDate(4, question.getEdited_date());
             statement.setInt(5, question.getCategory());
             statement.setInt(6, question.getCreated_by());
             statement.setInt(7, question.getId());

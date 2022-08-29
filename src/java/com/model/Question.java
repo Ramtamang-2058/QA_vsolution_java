@@ -3,13 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.model;
-
-import java.security.ProtectionDomain;
-import java.sql.Time;
-import java.util.Base64;
-
-import org.w3c.dom.Text;
-
+import java.sql.Date;
 /**
  *
  * @author ram
@@ -20,20 +14,22 @@ public class Question {
     protected int created_by_id;
     protected int category_id;
     protected String image;
-    protected String created_date;
-    protected String edited_date;
+    protected Date created_date;
+    protected Date edited_date;
 
     public Question() {}
 
-    public Question(String question, String image, int category_id, int created_by_id) {
+    public Question(String question, String image, Date created_date, Date edited_date, int category_id, int created_by_id) {
         super();
         this.question = question;
         this.created_by_id = created_by_id;
         this.category_id = category_id;
         this.image = image;
+        this.created_date = created_date;
+        this.edited_date = edited_date;
     }
 
-    public Question(int id, String question, String image, String created_date, String edited_date, int category_id, int created_by_id) {
+    public Question(int id, String question, String image, Date created_date, Date edited_date, int category_id, int created_by_id) {
         super();
         this.id = id;
         this.question = question;
@@ -75,16 +71,16 @@ public class Question {
     {
         this.image = image;
     }
-    public String getCreated_date(){
+    public Date getCreated_date(){
         return created_date;
     }
-    public void setCreated_date(String created_date){
+    public void setCreated_date(Date created_date){
         this.created_date = created_date;
     }
-    public String getEdited_date(){
+    public Date getEdited_date(){
         return edited_date;
     }
-    public void setEdited_ate(String edited_date){
+    public void setEdited_ate(Date edited_date){
         this.edited_date = edited_date;
     }
 }
