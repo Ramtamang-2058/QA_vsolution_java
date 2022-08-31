@@ -18,6 +18,9 @@ import javax.servlet.annotation.MultipartConfig;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
@@ -78,7 +81,9 @@ public class QuestionServlet extends HttpServlet {
                 case "/update":
                     updateQuestion(request, response);
                     break;
-
+                case "/question-list":
+                    listQuestion(request, response);
+                    break;
                 default:
                     listQuestion(request, response);
                     break;
@@ -120,18 +125,26 @@ public class QuestionServlet extends HttpServlet {
     }
     private void insertQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        try{
         Date created_date = new Date(System.currentTimeMillis());
         Date edited_date = new Date(System.currentTimeMillis());
-        String text = request.getParameter("name");
-        String image = request.getParameter("image");  
+        String text = request.getParameter("question");
         int category_id = Integer.parseInt(request.getParameter("categ"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
-        Question newQuestion = new Question(text, image, created_date, edited_date, category_id, created_by_id);
-        questionDao.insertQuestion(newQuestion);
-        response.sendRedirect("list");
-        }catch(Exception e){
-            System.out.println("e");
+        try{
+            Part pic_part = null;
+            String name = RandGeneratedStr();
+            pic_part = request.getPart("photo");
+            String fileName = "#" + name + ".png";
+            String contextPath = new File("").getAbsolutePath();
+            System.out.println("Context Path: " + contextPath);
+            String imageSavePath = "/home/ram/Downloads/javaproject/V2/web/static/image" + File.separator + fileName;
+            File fileSaveDir = new File(imageSavePath);
+            pic_part.write(imageSavePath + File.separator);
+            Question newQuestion = new Question(text, fileName, created_date, edited_date, category_id, created_by_id);
+                        questionDao.insertQuestion(newQuestion);
+            response.sendRedirect("list");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -140,12 +153,11 @@ public class QuestionServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String text = request.getParameter("question");
         String image = request.getParameter("image");
-        Date created_date = new Date(System.currentTimeMillis());
         Date edited_date = new Date(System.currentTimeMillis());
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
 
-        Question question = new Question(id, text, image, created_date, edited_date, category_id, created_by_id);
+        Question question = new Question(id, text, image, edited_date, category_id, created_by_id);
         questionDao.updateQuestion(question);
         response.sendRedirect("list");
     }

@@ -40,14 +40,16 @@
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
+                                        <form id="searchForm" action="javascript:search();">
+   <div class="input-group-append">
+      <button id="go" class="btn btn-primary" type="button" 
+              onclick="document.getElementById('searchForm').submit(); return false;">
+      </button>
+      <input type="text" id="searchItem" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
+   </div>
+</form>                      
                                     </div>
                                 </form>
                             </div>
@@ -207,3 +209,22 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                <script>
+function search() {
+ 
+   var name = document.getElementById("searchForm").elements["searchItem"].value;
+   var pattern = name.toLowerCase();
+   var targetId = "";
+ 
+   var divs = document.getElementsByClassName("col-md-2");
+   for (var i = 0; i < divs.length; i++) {
+      var para = divs[i].getElementsByTagName("p");
+      var index = para[0].innerText.toLowerCase().indexOf(pattern);
+      if (index != -1) {
+         targetId = divs[i].parentNode.id;
+         document.getElementById(targetId).scrollIntoView();
+         break;
+      }
+   }  
+}
+</script>

@@ -4,6 +4,7 @@
     Author     : ram
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -168,41 +169,6 @@ if((request.getSession(false).getAttribute("User")== null) )
   font-size: xx-large;
   color: #2e81f4;
 }
-
-/* story
-.story {
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 120px;
-  height: 200px;
-  box-shadow: 0px 5px 17px -7px rgba(0, 0, 0, 0.75);
-  border-radius: 10px;
-  margin-right: 10px;
-  transition: transform 100ms ease-in;
-  cursor: pointer;
-}
-
-.story:hover {
-  transform: scale(1.07);
-}
-
-.story__avatar {
-  margin: 10px;
-  color: blue;
-}
-
-.story h4 {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: white;
-}
-
-.storyReel {
-  padding: 10px 0;
-  display: flex;
-} */
 
 .main__body {
   display: flex;
@@ -430,9 +396,10 @@ body {
           src="MOT.png"
           alt=""
         />
+        
         <div class="header__input">
           <span class="material-icons"> search </span>
-          <input type="text" placeholder="Search..." />
+          <input type="text" id="Search" onkeyup="myFunction()" placeholder="Search..." />
         </div>
       </div>
 
@@ -493,67 +460,28 @@ body {
         </div>
         <!-- message sender ends -->
 
-        <!-- post starts -->
+         
+        <c:forEach var="question" items="${listQuestion}">  
+            <!-- post starts -->
         <div class="post">
           <div class="post__top">
             <img
               class="user__avatar post__avatar"
-              src="<%=request.getContextPath()%>/static/img/user/profile.png"
-              alt=""
-            />
-            <div class="post__topInfo">
-              <h3>subash sigdel</h3>
-              <p>25 April at 20:30</p>
-            </div>
-          </div>
-
-          <div class="post__bottom">
-            <p>What is Mission oxygen Team ?</p>
-          </div>
-
-          <div class="post__image">
-            <img
-              src="<%=request.getContextPath()%>/static/img/user/ldc.jpg"
-              alt=""
-            />
-          </div>
-
-          <div class="post__options">
-            <div class="post__option">
-                <div style="padding-bottom:10px" >
-                    <span class="material-icons"> thumb_up </span></div>
-                    <div><p>Like</p></div>
-            </div>
-
-            <div class="post__option">
-              <span class="material-icons"> chat_bubble_outline </span>
-              <p>Comment</p>
-            </div>
-
-            <div class="post__option">
-              <span class="material-icons"> near_me </span>
-              <p>Share</p>
-            </div>
-          </div>
-        </div>
-        <!-- post ends -->
-
-        <!-- post starts -->
-        <div class="post">
-          <div class="post__top">
-            <img
-              class="user__avatar post__avatar"
-              src="<%=request.getContextPath()%>/static/img/user/profile.png"
+              src="profile.png"
               alt=""
             />
             <div class="post__topInfo">
               <h3>Ram hari</h3>
-              <p>25 April at 20:30</p>
+              <p><c:out value="${question.created_date}" /></p>
             </div>
           </div>
 
           <div class="post__bottom">
-            <p>Mission Oxygen Team [MOT] for you, is the team to reach out for any technical help to install, operate, repair any medical equipment including oxygen concentrators and plants. We are already working with the COVID Alliance team, Nepal Ventilators Bank, FNCCI Covid Crisis Support team. We are already a team of 150+ members who are trained ...</p>
+            <p><c:out value="${question.question}" /></p>
+          </div>
+          
+           <div class="post__image">
+            <img src="<%=request.getContextPath()%>/<c:out value="${question.image}" />" alt="" />
           </div>
 
           <div class="post__options">
@@ -573,48 +501,9 @@ body {
             </div>
           </div>
         </div>
+                  </c:forEach>
         <!-- post ends -->
 
-        <!-- post starts -->
-        <div class="post">
-          <div class="post__top">
-            <img
-              class="user__avatar post__avatar"
-              src="<%=request.getContextPath()%>/static/img/user/profile.png"
-              alt=""
-            />
-            <div class="post__topInfo">
-              <h3>Somanath Goudar</h3>
-              <p>25 April at 20:30</p>
-            </div>
-          </div>
-
-          <div class="post__bottom">
-            <p>How to join missdion oxygen Team </p>
-          </div>
-
-          <div class="post__image">
-            <img src="<%=request.getContextPath()%>/static/img/user/edc.jpeg" alt="" />
-          </div>
-
-          <div class="post__options">
-            <div class="post__option">
-              <span class="material-icons"> thumb_up </span>
-              <p>Like</p>
-            </div>
-
-            <div class="post__option">
-              <span class="material-icons"> chat_bubble_outline </span>
-              <p>Comment</p>
-            </div>
-
-            <div class="post__option">
-              <span class="material-icons"> near_me </span>
-              <p>Share</p>
-            </div>
-          </div>
-        </div>
-        <!-- post ends -->
       </div>
       <!-- feed ends -->
 
@@ -635,6 +524,22 @@ body {
 
         </div>
         <!-- End of Content Wrapper -->
+        
+<script>
+function myFunction() {
+  var input = document.getElementById("Search");
+  var filter = input.value.toLowerCase();
+  var nodes = document.getElementsByClassName('post');
+
+  for (i = 0; i < nodes.length; i++) {
+    if (nodes[i].innerText.toLowerCase().includes(filter)) {
+      nodes[i].style.display = "block";
+    } else {
+      nodes[i].style.display = "none";
+    }
+  }
+}
+</script>
 <jsp:include page="../footer.jsp" /></div>
 
 <jsp:include page="../logout.jsp" />

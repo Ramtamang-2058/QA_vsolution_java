@@ -96,9 +96,6 @@
                             <label>Created by</label> <input type="text" value="<c:out value='${question.created_by}' />" class="form-control" name="created_by_id">
                         </fieldset>
                         <fieldset class="form-group">
-                            <label>image</label> <input type="text" value="<c:out value='${question.created_by}' />" class="form-control" name="image">
-                        </fieldset>
-                        <fieldset class="form-group">
                             <label>Category</label>
                             <select name="categ">
                             <c:forEach var="categry" items="${listCategory}">

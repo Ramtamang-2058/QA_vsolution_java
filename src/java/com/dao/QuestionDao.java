@@ -29,7 +29,7 @@ public class QuestionDao {
     private static final String SELECT_QUESTIONS_BY_ID = "select id, question, image, created_date, edited_date, category_id, created_by_id from vsolution_question where id =?;";
     private static final String SELECT_ALL_QUESTIONS = "select * from vsolution_question";
     private static final String DELETE_QUESTIONS_SQL = "delete from questions where id = ?;";
-    private static final String UPDATE_QUESTIONS_SQL = "update vsolution_question set question = ?, image= ?, created_date=?, edited_date=?, category_id =?, created_by_id=? where id = ?;";
+    private static final String UPDATE_QUESTIONS_SQL = "update vsolution_question set question = ?, image= ?, edited_date=?, category_id =?, created_by_id=? where id = ?;";
 
     public QuestionDao(){}
 

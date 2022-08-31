@@ -57,6 +57,8 @@
         <url-pattern>/QuestionServlet</url-pattern>
         <url-pattern>/new</url-pattern>
         <url-pattern>/insert</url-pattern>
+        <url-pattern>/question-list</url-pattern>
+        
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnswerServlet</servlet-name>
