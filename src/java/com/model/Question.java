@@ -12,6 +12,7 @@ public class Question {
     protected int id;
     protected String question;
     protected int created_by_id;
+    protected String user;
     protected int category_id;
     protected String image;
     protected Date created_date;
@@ -44,6 +45,18 @@ public class Question {
         this.id = id;
         this.question = question;
         this.image= image;
+        this.created_date= created_date;
+        this.edited_date = edited_date;
+        this.category_id = category_id;
+        this.created_by_id = created_by_id;
+    }
+    
+    public Question(int id, String question, String image, String user, Date created_date, Date edited_date, int category_id, int created_by_id) {
+        super();
+        this.id = id;
+        this.question = question;
+        this.image= image;
+        this.user = user;
         this.created_date= created_date;
         this.edited_date = edited_date;
         this.category_id = category_id;
@@ -92,5 +105,12 @@ public class Question {
     }
     public void setEdited_ate(Date edited_date){
         this.edited_date = edited_date;
+    }
+    public String getUser(){
+        return user;
+    }
+    
+    public void setUser(String user){
+        this.user = user;
     }
 }

@@ -27,7 +27,7 @@ public class QuestionDao {
         " (?, ?, ?, ?, ?, ?);";
 
     private static final String SELECT_QUESTIONS_BY_ID = "select id, question, image, created_date, edited_date, category_id, created_by_id from vsolution_question where id =?;";
-    private static final String SELECT_ALL_QUESTIONS = "select * from vsolution_question";
+    private static final String SELECT_ALL_QUESTIONS = "select * from vsolution_question INNER JOIN users ON vsolution_question.created_by_id=users.id;";
     private static final String DELETE_QUESTIONS_SQL = "delete from questions where id = ?;";
     private static final String UPDATE_QUESTIONS_SQL = "update vsolution_question set question = ?, image= ?, edited_date=?, category_id =?, created_by_id=? where id = ?;";
 
@@ -108,11 +108,12 @@ public class QuestionDao {
                 int id = rs.getInt("id");
                 String text = rs.getString("question");
                 String image = rs.getString("image");
+                String username = rs.getString("fullname");
                 Date created_date = rs.getDate("created_date");
                 Date edited_date = rs.getDate("edited_Date");
                 int category_id = rs.getInt("category_id");
                 int created_by_id = rs.getInt("created_by_id");
-                questions.add(new Question(id, text, image, created_date, edited_date, category_id, created_by_id));
+                questions.add(new Question(id, text, image, username, created_date, edited_date, category_id, created_by_id));
             }
         } catch (SQLException e) {
             printSQLException(e);

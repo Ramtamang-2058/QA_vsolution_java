@@ -471,7 +471,7 @@ body {
               alt=""
             />
             <div class="post__topInfo">
-              <h3>Ram hari</h3>
+              <h3><c:out value="${question.user}" /></h3>
               <p><c:out value="${question.created_date}" /></p>
             </div>
           </div>
@@ -492,7 +492,7 @@ body {
 
             <div class="post__option">
               <span class="material-icons"> chat_bubble_outline </span>
-              <p>Comment</p>
+              <p>Answers</p>
             </div>
 
             <div class="post__option">
