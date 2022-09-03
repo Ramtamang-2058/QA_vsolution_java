@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
  
 import com.model.Login;
 import com.dao.LoginDao;
+import com.dao.UserDao;
+import com.model.User;
 import javax.servlet.annotation.WebServlet;
  
 
@@ -42,7 +44,6 @@ System.out.println("Inside servlet");
         if(userValidate.equals("Admin_Role"))
         {
             System.out.println("Admin's Home");
- 
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("Admin", userName); //setting session attribute
             request.setAttribute("userName", userName);
@@ -65,9 +66,10 @@ System.out.println("Inside servlet");
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(10*60);
             session.setAttribute("User", userName);
+            session.setAttribute("password", password);
             request.setAttribute("userName", userName);
- 
-            request.getRequestDispatcher("/user/Home.jsp").forward(request, response);
+            response.sendRedirect("question-list");
+//            request.getRequestDispatcher("/user/Home.jsp").forward(request, response);
         }
         else
         {

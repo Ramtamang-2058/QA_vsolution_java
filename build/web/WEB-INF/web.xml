@@ -28,6 +28,14 @@
         <servlet-name>AnswerServlet</servlet-name>
         <servlet-class>com.view.AnswerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.view.UserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MessageServlet</servlet-name>
+        <servlet-class>com.view.MessageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -58,12 +66,20 @@
         <url-pattern>/new</url-pattern>
         <url-pattern>/insert</url-pattern>
         <url-pattern>/question-list</url-pattern>
-        
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnswerServlet</servlet-name>
         <url-pattern>/AnswerServlet</url-pattern>
         <url-pattern>/viewAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/UserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageServlet</servlet-name>
+        <url-pattern>/MessageServlet</url-pattern>
+        <url-pattern>/message-list</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

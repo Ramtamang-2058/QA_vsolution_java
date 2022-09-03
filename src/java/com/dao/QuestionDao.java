@@ -109,11 +109,12 @@ public class QuestionDao {
                 String text = rs.getString("question");
                 String image = rs.getString("image");
                 String username = rs.getString("fullname");
+                String profile = rs.getString("profile");
                 Date created_date = rs.getDate("created_date");
                 Date edited_date = rs.getDate("edited_Date");
                 int category_id = rs.getInt("category_id");
                 int created_by_id = rs.getInt("created_by_id");
-                questions.add(new Question(id, text, image, username, created_date, edited_date, category_id, created_by_id));
+                questions.add(new Question(id, text, image, username, profile, created_date, edited_date, category_id, created_by_id));
             }
         } catch (SQLException e) {
             printSQLException(e);

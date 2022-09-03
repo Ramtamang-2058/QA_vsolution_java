@@ -6,25 +6,18 @@ package com.view;
 
 import com.dao.CategoryDao;
 import com.dao.QuestionDao;
+import com.dao.UserDao;
 import com.model.Category;
 import com.model.Question;
+import com.model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 import java.io.File;
-import javax.servlet.http.Part;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.Part;
@@ -33,6 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,11 +42,13 @@ public class QuestionServlet extends HttpServlet {
 
     private QuestionDao questionDao;
     private CategoryDao categoryDao;
+    private UserDao userDao;
 
     @Override
     public void init() {
         questionDao = new QuestionDao();
         categoryDao = new CategoryDao();
+        userDao = new UserDao();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -97,11 +93,18 @@ public class QuestionServlet extends HttpServlet {
 
     private void listQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
+        HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(10*60);
+        String userName=(String)session.getAttribute("User");  
+        String password = (String)session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
         List< Question> listQuestion = questionDao.selectAllQuestions();
         List< Category> listCategory = categoryDao.selectAllCategories();
-        System.out.println("All category list from listQuestion: " + listCategory);
         request.setAttribute("listQuestion", listQuestion);
         request.setAttribute("listCategory", listCategory);
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        System.out.println("user detail are:" + user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/user/Home.jsp");
         dispatcher.forward(request, response);
     }
@@ -134,9 +137,8 @@ public class QuestionServlet extends HttpServlet {
             Part pic_part = null;
             String name = RandGeneratedStr();
             pic_part = request.getPart("photo");
-            String fileName = "#" + name + ".png";
+            String fileName = "/static/image/#" + name + ".png";
             String contextPath = new File("").getAbsolutePath();
-            System.out.println("Context Path: " + contextPath);
             String imageSavePath = "/home/ram/Downloads/javaproject/V2/web/static/image" + File.separator + fileName;
             File fileSaveDir = new File(imageSavePath);
             pic_part.write(imageSavePath + File.separator);

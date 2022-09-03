@@ -31,7 +31,20 @@ public class CategoryServlet extends HttpServlet {
         String action = request.getServletPath();
         try {
             switch (action) {
-                case "/newCategory":
+                case "/new-category":
+                    showNewForm(request, response);
+                    break;
+                case "/post-category":
+                    insertCategory(request, response);
+                    break;
+                case "/delete-category":
+                    deleteCategory(request, response);
+                    break;
+                case "/edit-category":
+                    showEditForm(request, response);
+                    break;
+                case "/update-category":
+                    updateCategory(request, response);
                     break;
 
                 case "/list":
@@ -48,5 +61,46 @@ public class CategoryServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/new-questions.jsp");
         request.setAttribute("listCategory", listCategory);
         dispatcher.forward(request, response);
+    }
+    
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("new-categorys.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Category existingCategory = categoryDao.selectCategory(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/new-categorys.jsp");
+        request.setAttribute("category", existingCategory);
+        dispatcher.forward(request, response);
+
+    }
+    private void insertCategory(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        String text = request.getParameter("name");
+        Category newCategory = new Category(text);
+        categoryDao.insertCategory(newCategory);
+        response.sendRedirect("list");
+    }
+
+    private void updateCategory(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+       
+        Category category = new Category(id, name);
+        categoryDao.updateCategory(category);
+        response.sendRedirect("list");
+    }
+
+    private void deleteCategory(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        categoryDao.deleteCategory(id);
+        response.sendRedirect("list");
+
     }
 }

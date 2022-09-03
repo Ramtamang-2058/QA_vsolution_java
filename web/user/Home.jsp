@@ -441,7 +441,7 @@ body {
               src="<%=request.getContextPath()%>/static/img/user/profile.png"
               alt=""
             />
-            
+            <p><c:out value="${user.username}" /></p>
             <form>
               <input class="messageSender__input" placeholder="What's on your mind?" type="text" />
             </form>
@@ -467,7 +467,7 @@ body {
           <div class="post__top">
             <img
               class="user__avatar post__avatar"
-              src="profile.png"
+              src="<%=request.getContextPath()%>/<c:out value="${question.profile}" />"
               alt=""
             />
             <div class="post__topInfo">
@@ -513,7 +513,7 @@ body {
 
 
      </div>
-
+git a
                 </div>
                 <!-- /.container-fluid -->
 

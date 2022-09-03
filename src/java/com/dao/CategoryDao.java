@@ -14,6 +14,20 @@ import java.sql.*;
  * @author ram
  */
 public class CategoryDao {
+    
+    Connection con = null;
+    ResultSet resultSet = null;
+    Category category = null;
+    
+    //SQL queries
+    private static final String INSERT_CATEGORYS_SQL = "INSERT INTO vsolution_category" + "  (name) VALUES " +
+        " (?);";
+
+    private static final String SELECT_CATEGORYS_BY_ID = "select id, name from vsolution_category where id =?;";
+    private static final String DELETE_CATEGORYS_SQL = "delete from vsolution_category where id = ?;";
+    private static final String UPDATE_CATEGORYS_SQL = "update vsolution_category set name= ? where id = ?;";
+    
+    
     public List < Category > selectAllCategories(){
         Connection con = null;
         Statement statement = null;
@@ -35,7 +49,74 @@ public class CategoryDao {
         }
         return categories;
     }
+    
+    PreparedStatement preparedStatement = null;
+    public Category selectCategory(int id) {
+        // Step 1: Establishing a Connection
+        try {
+           con = DBConnection.createConnection();
+           preparedStatement = con.prepareStatement(SELECT_CATEGORYS_BY_ID);
+           preparedStatement.setInt(1, id);
+           System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+           resultSet = preparedStatement.executeQuery();
 
+            // Step 4: Process the ResultSet object.
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                category = new Category(id, name);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return category;
+    }
+    
+    public void insertCategory(Category category) throws SQLException{
+        try{
+            con = DBConnection.createConnection();
+            preparedStatement = con.prepareStatement(INSERT_CATEGORYS_SQL);
+            preparedStatement.setString(1, category.getName());
+            preparedStatement.executeUpdate();
+            
+
+        }catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+    
+    public boolean deleteCategory(int id) throws SQLException {
+        boolean rowDeleted = false;
+        try{
+            con = DBConnection.createConnection();
+            preparedStatement = con.prepareStatement(DELETE_CATEGORYS_SQL);
+            preparedStatement.setInt(1, id);
+            rowDeleted =preparedStatement.executeUpdate() > 0;
+            
+        }catch (SQLException e) {
+            printSQLException(e);
+        }
+        return rowDeleted;
+    }
+
+    public boolean updateCategory(Category answer) throws SQLException {
+        boolean rowUpdated = false;
+        try{
+            con = DBConnection.createConnection();
+            preparedStatement = con.prepareStatement(UPDATE_CATEGORYS_SQL);
+            preparedStatement.setString(1, answer.getName());
+            preparedStatement.setInt(2, answer.getId());
+
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        
+        }catch (SQLException e) {
+            printSQLException(e);
+        }
+        return rowUpdated;
+    }
+    
+    
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
