@@ -185,6 +185,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 .sidebar {
@@ -389,48 +390,14 @@ body {
 }
 
                 </style>
-                <div class="container-fluid">
-<div class="header">
-      <div class="header__left">
-        <img
-          src="MOT.png"
-          alt=""
-        />
-        
-        <div class="header__input">
-          <span class="material-icons"> search </span>
-          <input type="text" id="Search" onkeyup="myFunction()" placeholder="Search..." />
-        </div>
-      </div>
+<div class="container-fluid" >
 
-      <div class="header__middle">
-        
-        <div class="header__option active header_2">Recent Question
-        </div>
-        <div class="header__option header_2">No answered
-        </div>
-        <div class="header__option header_2">Most answered
-        </div>
-        <div class="header__option header_2">Most Visted
-        </div>
-        <div class="header__option header_2"> Most Liked
-        </div>
-      </div>
-
-      <div class="header__right">
-        <span class="material-icons"> add </span>
-        <span class="material-icons"> expand_more </span>
-      </div>
-    </div>
-    <!-- header ends -->
 
     <!-- main body starts -->
     <div class="main__body">
 
       <!-- feed starts -->
       <div class="feed">
-        <div class="storyReel">
-        </div>
 
         <!-- message sender starts -->
         <div class="messageSender">
@@ -438,10 +405,9 @@ body {
           <div class="messageSender__top">
             <img
               class="user__avatar"
-              src="<%=request.getContextPath()%>/static/img/user/profile.png"
+              src="<%=request.getContextPath()%>/<c:out value="${user.profile}" />"
               alt=""
             />
-            <p><c:out value="${user.username}" /></p>
             <form>
               <input class="messageSender__input" placeholder="What's on your mind?" type="text" />
             </form>
@@ -513,8 +479,7 @@ body {
 
 
      </div>
-git a
-                </div>
+          </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -545,6 +510,7 @@ function myFunction() {
 <jsp:include page="../logout.jsp" />
     <!-- Bootstrap core JavaScript-->
 <jsp:include page="../scripts.jsp" />
+
 </body>
 
 </html>

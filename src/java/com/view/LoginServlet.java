@@ -48,7 +48,7 @@ System.out.println("Inside servlet");
             session.setAttribute("Admin", userName); //setting session attribute
             request.setAttribute("userName", userName);
  
-            request.getRequestDispatcher("/JSP/Admin.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/home.jsp").forward(request, response);
         }
         else if(userValidate.equals("Editor_Role"))
         {
