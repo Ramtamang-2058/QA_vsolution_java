@@ -59,37 +59,42 @@
                             <h6 class="m-0 font-weight-bold text-primary">All Questions</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="overflow-x:auto;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Code</th>
+                                            <th>Question</th>
+                                            <th>Created By</th>
+                                            <th>Created Date</th>
+                                            <th>Edited Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Code</th>
+                                            <th>Question</th>
+                                            <th>Created By</th>
+                                            <th>Created Date</th>
+                                            <th>Edited Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <c:forEach var="question" items="${listQuestion}"> 
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                            <td><a href="admin-question-detail-view?id=<c:out value='${question.id}' />"><c:out value="${question.code}" /></a></td>
+                                            <td><c:out value="${question.question}" /></td>
+                                            <td><c:out value="${question.user}" /></td>
+                                            <td><c:out value="${question.created_date}" /></td>
+                                            <td><c:out value="${question.edited_date}" /></td>
+                                            <td>
+                                                <a href="#" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
+                                                <a href="#" class='btn btn-danger btn-sm delete btn-flat'><i class='fa fa-trash'></i> &nbsp;&nbsp;Delete</a>
+      </td>                                 </td>
+                                      </c:forEach>
+
                                         <tr>
                                             <td>Garrett Winters</td>
                                             <td>Accountant</td>

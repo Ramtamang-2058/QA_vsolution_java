@@ -10,37 +10,38 @@ import com.dao.UserDao;
 import com.model.Category;
 import com.model.Question;
 import com.model.User;
-import java.io.IOException;
-import java.util.Random;
 import java.io.File;
-import javax.servlet.annotation.MultipartConfig;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.Part;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ram
  */
 
+
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, //2mb
         maxFileSize = 1024 * 1024 * 10, //10mb
         maxRequestSize = 1024 * 1024 * 50)
 
+public class AdminQestionServlet extends HttpServlet {
 
-public class QuestionServlet extends HttpServlet {
-
-    private QuestionDao questionDao;
+     private QuestionDao questionDao;
     private CategoryDao categoryDao;
     private UserDao userDao;
 
@@ -77,7 +78,7 @@ public class QuestionServlet extends HttpServlet {
                 case "/update":
                     updateQuestion(request, response);
                     break;
-                case "/question-list":
+                case "/admin-question-list":
                     listQuestion(request, response);
                     break;
                 default:
@@ -105,7 +106,7 @@ public class QuestionServlet extends HttpServlet {
         request.setAttribute("userName", userName);
         request.setAttribute("user", user);
         System.out.println("user detail are:" + user);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/user/Home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/home.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -126,6 +127,17 @@ public class QuestionServlet extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
+    
+    private void showDetail(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Question existingQuestion = questionDao.selectQuestion(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/questionview.jsp");
+        request.setAttribute("question", existingQuestion);
+        dispatcher.forward(request, response);
+
+    }
+    
     private void insertQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         Date created_date = new Date(System.currentTimeMillis());
@@ -181,4 +193,3 @@ public class QuestionServlet extends HttpServlet {
         return new String(id);
     }
 }
-

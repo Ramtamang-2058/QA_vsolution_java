@@ -44,19 +44,23 @@ System.out.println("Inside servlet");
         if(userValidate.equals("Admin_Role"))
         {
             System.out.println("Admin's Home");
-            HttpSession session = request.getSession(); //Creating a session
-            session.setAttribute("Admin", userName); //setting session attribute
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(10*60);
+            session.setAttribute("User", userName);
+            session.setAttribute("password", password);
             request.setAttribute("userName", userName);
- 
-            request.getRequestDispatcher("/admin/home.jsp").forward(request, response);
+            response.sendRedirect("admin-question-list");
         }
         else if(userValidate.equals("Editor_Role"))
         {
             System.out.println("Editor's Home");
  
             HttpSession session = request.getSession();
-            session.setAttribute("Editor", userName);
+            session.setMaxInactiveInterval(10*60);
+            session.setAttribute("User", userName);
+            session.setAttribute("password", password);
             request.setAttribute("userName", userName);
+            response.sendRedirect("question-list");
  
             request.getRequestDispatcher("/JSP/Editor.jsp").forward(request, response);
         }

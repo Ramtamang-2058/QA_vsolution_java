@@ -36,6 +36,22 @@
         <servlet-name>MessageServlet</servlet-name>
         <servlet-class>com.view.MessageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminHome</servlet-name>
+        <servlet-class>com.view.AdminHome</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQestionServlet</servlet-name>
+        <servlet-class>com.view.AdminQestionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAnswerServlet</servlet-name>
+        <servlet-class>com.view.AdminAnswerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <servlet-class>com.view.AdminUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -80,6 +96,26 @@
         <servlet-name>MessageServlet</servlet-name>
         <url-pattern>/MessageServlet</url-pattern>
         <url-pattern>/message-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminHome</servlet-name>
+        <url-pattern>/AdminHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQestionServlet</servlet-name>
+        <url-pattern>/AdminQestionServlet</url-pattern>
+        <url-pattern>/admin-new-question</url-pattern>
+        <url-pattern>/insert-new-question</url-pattern>
+        <url-pattern>/admin-question-list</url-pattern>
+        <url-pattern>/admin-question-detail-view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAnswerServlet</servlet-name>
+        <url-pattern>/AdminAnswerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <url-pattern>/AdminUserServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

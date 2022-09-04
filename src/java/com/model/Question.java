@@ -10,6 +10,7 @@ import java.sql.Date;
  */
 public class Question {
     protected int id;
+    protected String code;
     protected String question;
     protected int created_by_id;
     protected String user;
@@ -21,8 +22,9 @@ public class Question {
 
     public Question() {}
 
-    public Question(String question, String image, Date created_date, Date edited_date, int category_id, int created_by_id) {
+    public Question(String code, String question, String image, Date created_date, Date edited_date, int category_id, int created_by_id) {
         super();
+        this.code = code;
         this.question = question;
         this.created_by_id = created_by_id;
         this.category_id = category_id;
@@ -41,9 +43,10 @@ public class Question {
         this.created_by_id = created_by_id;
     }
     
-    public Question(int id, String question, String image, Date created_date, Date edited_date, int category_id, int created_by_id) {
+    public Question(int id, String code, String question, String image, Date created_date, Date edited_date, int category_id, int created_by_id) {
         super();
         this.id = id;
+        this.code = code;
         this.question = question;
         this.image= image;
         this.created_date= created_date;
@@ -52,9 +55,10 @@ public class Question {
         this.created_by_id = created_by_id;
     }
     
-    public Question(int id, String question, String image, String user, String profile, Date created_date, Date edited_date, int category_id, int created_by_id) {
+    public Question(int id, String code, String question, String image, String user, String profile, Date created_date, Date edited_date, int category_id, int created_by_id) {
         super();
         this.id = id;
+        this.code = code;
         this.question = question;
         this.image= image;
         this.user = user;
@@ -121,5 +125,11 @@ public class Question {
     }
     public void setProfile(String profile){
         this.profile = profile;
+    }
+    public String getCode(){
+        return code;
+    }
+    public void setCode(String code){
+        this.code = code;
     }
 }
