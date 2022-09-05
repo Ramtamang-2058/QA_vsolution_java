@@ -8,6 +8,7 @@ import com.dao.AnswerDao;
 import com.model.Answer;
 import com.model.Question;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -107,8 +108,8 @@ public class AnswerServlet extends HttpServlet {
         String text = request.getParameter("answer");
         String question ="sdf";
         String image = request.getParameter("image");
-        String created_date = request.getParameter("created_date");
-        String edited_date = request.getParameter("edited_date");
+        Date created_date = new Date(System.currentTimeMillis());
+        Date edited_date = new Date(System.currentTimeMillis());
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
 

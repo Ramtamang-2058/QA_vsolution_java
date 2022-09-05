@@ -110,14 +110,14 @@ public class MessageServlet extends HttpServlet {
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
         try{
             Part pic_part = null;
-            String name = RandGeneratedStr();
+            String name = "#" + RandGeneratedStr();
             pic_part = request.getPart("photo");
             String fileName = "/static/image/#" + name + ".png";
             String contextPath = new File("").getAbsolutePath();
             String imageSavePath = "/home/ram/Downloads/javaproject/V2/web/static/image" + File.separator + fileName;
             File fileSaveDir = new File(imageSavePath);
             pic_part.write(imageSavePath + File.separator);
-            Question newQuestion = new Question(text, fileName, created_date, edited_date, category_id, created_by_id);
+            Question newQuestion = new Question(name, text, fileName, created_date, edited_date, category_id, created_by_id);
                         questionDao.insertQuestion(newQuestion);
             response.sendRedirect("list");
         } catch (Exception e) {

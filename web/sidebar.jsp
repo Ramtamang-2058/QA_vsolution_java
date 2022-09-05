@@ -94,13 +94,7 @@
                 Questions
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="viewAnswer" action="/viewAnswer">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>viewAnswer</span>
-                </a>
-            </li>
+           
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">

@@ -112,6 +112,7 @@
     <servlet-mapping>
         <servlet-name>AdminAnswerServlet</servlet-name>
         <url-pattern>/AdminAnswerServlet</url-pattern>
+        <url-pattern>/adminViewAnswer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminUserServlet</servlet-name>

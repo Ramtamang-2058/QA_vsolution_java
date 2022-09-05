@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.model;
+
+import java.sql.Date;
+
 /**
  *
  * @author ram
@@ -13,8 +16,8 @@ public class Answer {
     protected int created_by_id;
     protected int question_id;
     protected String image;
-    protected String created_date;
-    protected String edited_date;
+    protected Date created_date;
+    protected Date edited_date;
     protected String user;
 
     public Answer() {}
@@ -27,7 +30,7 @@ public class Answer {
         this.image = image;
     }
 
-    public Answer(int id, String image, String answer, String created_date, String edited_date, int question_id, int created_by_id) {
+    public Answer(int id, String image, String answer, Date created_date, Date edited_date, int question_id, int created_by_id) {
         super();
         this.id = id;
         this.answer = answer;
@@ -38,7 +41,7 @@ public class Answer {
         this.created_by_id = created_by_id;
     }
     
-    public Answer(int id, String image, String user, String answer, String created_date, String edited_date, int question_id, int created_by_id) {
+    public Answer(int id, String image, String user, String answer, Date created_date, Date edited_date, int question_id, int created_by_id) {
         super();
         this.id = id;
         this.answer = answer;
@@ -82,16 +85,16 @@ public class Answer {
     {
         this.image = image;
     }
-    public String getCreatedDate(){
+    public Date getCreated_date(){
         return created_date;
     }
-    public void setCreatedDate(String created_date){
+    public void setCreated_date(Date created_date){
         this.created_date = created_date;
     }
-    public String getEditedDate(){
+    public Date getEdited_date(){
         return edited_date;
     }
-    public void setEditedDate(String edited_date){
+    public void setEdited_ate(Date edited_date){
         this.edited_date = edited_date;
     }
     
@@ -101,5 +104,13 @@ public class Answer {
     
     public void setUser(String user){
         this.user = user;
+    }
+
+    public Date getCreatedDate() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Date getEditedDate() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

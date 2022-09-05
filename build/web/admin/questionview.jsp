@@ -38,7 +38,8 @@ if((request.getSession(false).getAttribute("User")== null) )
             <div id="content">
                 <jsp:include page="../navbar.jsp" />
                 <!-- Begin Page Content -->
-                <style>
+      <!-- End of Content Wrapper -->
+      <style>
                     * {
   margin: 0;
   box-sizing: border-box;
@@ -390,43 +391,6 @@ body {
 }
 
                 </style>
-<div class="container-fluid" >
-
-
-    <!-- main body starts -->
-    <div class="main__body">
-
-      <!-- feed starts -->
-      <div class="feed">
-
-        <!-- message sender starts -->
-        <div class="messageSender">
-          <!-- <a class="ask">Ask Here</a> -->
-          <div class="messageSender__top">
-            <img
-              class="user__avatar"
-              src="<%=request.getContextPath()%>/<c:out value="${user.profile}" />"
-              alt=""
-            />
-            <form>
-              <input class="messageSender__input" placeholder="What's on your mind?" type="text" />
-            </form>
-          </div>
-
-          <div class="messageSender__bottom">
-            <div class="messageSender__option">
-              <h3>photo</h3>
-              <span style="color: green" class="material-icons">camera</span>
-            </div>
-            <div class="messageSender__option">
-              <h3>Post</h3>
-              <span style="color: green" class="material-icons"> send</span>
-            </div>
-          </div>
-        </div>
-        <!-- message sender ends -->
-
-         
             <!-- post starts -->
         <div class="post">
           <div class="post__top">
@@ -466,28 +430,11 @@ body {
             </div>
           </div>
         </div>
-        <!-- post ends -->
-
-      </div>
-      <!-- feed ends -->
-
-
-     </div>
-
-
-
-     </div>
-          </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-           
-
         </div>
-        <!-- End of Content Wrapper -->
-        
+    </div>
+</body><!-- comment -->
 <script>
 function myFunction() {
   var input = document.getElementById("Search");

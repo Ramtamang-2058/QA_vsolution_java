@@ -37,7 +37,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!--start side bar--> 
-       <jsp:include page="../sidebar.jsp" />
+       <jsp:include page="../adminSidebar.jsp" />
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

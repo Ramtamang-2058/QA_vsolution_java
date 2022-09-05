@@ -81,6 +81,9 @@ public class AdminQestionServlet extends HttpServlet {
                 case "/admin-question-list":
                     listQuestion(request, response);
                     break;
+                case "/admin-question-detail-view":
+                    showDetail(request, response);
+                    break;
                 default:
                     listQuestion(request, response);
                     break;
@@ -130,10 +133,16 @@ public class AdminQestionServlet extends HttpServlet {
     
     private void showDetail(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10*60);
+        String userName=(String)session.getAttribute("User");  
+        String password = (String)session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
         int id = Integer.parseInt(request.getParameter("id"));
         Question existingQuestion = questionDao.selectQuestion(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/questionview.jsp");
         request.setAttribute("question", existingQuestion);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/questionview.jsp");
         dispatcher.forward(request, response);
 
     }
