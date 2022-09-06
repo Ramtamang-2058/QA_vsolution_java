@@ -48,7 +48,7 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="viewAnswer" action="/viewAnswer">
+                <a class="nav-link" href="admin-user-list" action="/admin-user-list">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>User</span>
                 </a>

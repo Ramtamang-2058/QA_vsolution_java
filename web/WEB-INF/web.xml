@@ -108,6 +108,7 @@
         <url-pattern>/insert-new-question</url-pattern>
         <url-pattern>/admin-question-list</url-pattern>
         <url-pattern>/admin-question-detail-view</url-pattern>
+        <url-pattern>/adminAnswerDetailview</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAnswerServlet</servlet-name>
@@ -117,6 +118,7 @@
     <servlet-mapping>
         <servlet-name>AdminUserServlet</servlet-name>
         <url-pattern>/AdminUserServlet</url-pattern>
+        <url-pattern>/admin-user-list</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

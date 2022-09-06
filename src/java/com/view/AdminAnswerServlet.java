@@ -63,7 +63,9 @@ public class AdminAnswerServlet extends HttpServlet {
                 case "/update_answer":
                     updateAnswer(request, response);
                     break;
-
+                case "/adminAnswerDetailview":
+                    answerDetailView(request, response);
+                    
                 case "/adminViewAnswer":
                     listAnswer(request, response);
                     break;
@@ -96,6 +98,7 @@ public class AdminAnswerServlet extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+        
         int id = Integer.parseInt(request.getParameter("id"));
         Answer existingAnswer = answerDao.selectAnswer(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/new-answers.jsp");
@@ -103,13 +106,31 @@ public class AdminAnswerServlet extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
+    
+    private void answerDetailView(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(10*60);
+        String userName=(String)session.getAttribute("User");  
+        String password = (String)session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
+        Answer existingAnswer = answerDao.selectAnswer(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/answer-detail-view.jsp");
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        request.setAttribute("answer", existingAnswer);
+        dispatcher.forward(request, response);
+
+    }
     private void insertAnswer(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+        String code = "code";
         String text = request.getParameter("name");
         String image = request.getParameter("image");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
-        Answer newAnswer = new Answer(text, image, category_id, created_by_id);
+        Answer newAnswer = new Answer(code, text, image, category_id, created_by_id);
         answerDao.insertAnswer(newAnswer);
         response.sendRedirect("list");
     }

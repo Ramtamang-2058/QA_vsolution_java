@@ -29,7 +29,7 @@ public class AnswerDao {
     private static final String INSERT_ANSWERS_SQL = "INSERT INTO vsolution_answer" + "  (image, question, category_id, created_by_id) VALUES " +
         " (?, ?, ?, ?);";
 
-    private static final String SELECT_ANSWERS_BY_ID = "select id, image, answer, created_date, edited_date, category_id, created_by_id from vsolution_answer where id =?;";
+    private static final String SELECT_ANSWERS_BY_ID = "select id, code, image, answer, created_date, edited_date, category_id, created_by_id from vsolution_answer where id =?;";
     private static final String SELECT_ALL_ANSWERS = "select * from vsolution_answer";
     private static final String DELETE_ANSWERS_SQL = "delete from vsolution_answer where id = ?;";
     private static final String UPDATE_ANSWERS_SQL = "update vsolution_answer set image= ?, answer = ?, created_date=?, edited_date=?, category_id =?, created_by_id=? where id = ?;";
@@ -48,6 +48,7 @@ public class AnswerDao {
 
             // Step 4: Process the ResultSet object.
             while (resultSet.next()) {
+                String code = resultSet.getString("code");
                 String image = resultSet.getString("image");
                 String text = resultSet.getString("answer");
                 String question = resultSet.getString("question");
@@ -56,7 +57,7 @@ public class AnswerDao {
                 Date edited_date = resultSet.getDate("edited_Date");
                 int category_id = resultSet.getInt("category_id");
                 int created_by_id = resultSet.getInt("created_by_id");
-                answers = new Answer(id, image, text, created_date, edited_date, category_id, created_by_id);
+                answers = new Answer(id, code, image, text, created_date, edited_date, category_id, created_by_id);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -96,6 +97,7 @@ public class AnswerDao {
             // Step 4: Process the ResultSet object.
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
+                String code = resultSet.getString("code");
                 String text = resultSet.getString("answer");
                 String user = resultSet.getString("fullname");
                 String image = resultSet.getString("image");
@@ -104,7 +106,7 @@ public class AnswerDao {
                 int question_id = resultSet.getInt("question_id");
                 int created_by_id = resultSet.getInt("created_by_id");
                 System.out.println(id + "  " + user+"   "+question_id);
-                answers.add(new Answer(id, image, user, text, created_date, edited_date, question_id, created_by_id));
+                answers.add(new Answer(id, code, image, text, user, created_date, edited_date, question_id, created_by_id));
             }
         } catch (SQLException e) {
             printSQLException(e);

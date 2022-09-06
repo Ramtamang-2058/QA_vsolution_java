@@ -93,11 +93,12 @@ public class AnswerServlet extends HttpServlet {
     }
     private void insertAnswer(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+        String code = "code";
         String text = request.getParameter("name");
         String image = request.getParameter("image");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
-        Answer newAnswer = new Answer(text, image, category_id, created_by_id);
+        Answer newAnswer = new Answer(code, text, image, category_id, created_by_id);
         answerDao.insertAnswer(newAnswer);
         response.sendRedirect("list");
     }

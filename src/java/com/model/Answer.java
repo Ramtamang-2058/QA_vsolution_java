@@ -12,6 +12,7 @@ import java.sql.Date;
  */
 public class Answer {
     protected int id;
+    protected String code;
     protected String answer;
     protected int created_by_id;
     protected int question_id;
@@ -22,17 +23,19 @@ public class Answer {
 
     public Answer() {}
 
-    public Answer(String image, String answer, int question_id, int created_by_id) {
+    public Answer(String code, String image, String answer, int question_id, int created_by_id) {
         super();
         this.answer = answer;
+        this.code = code;
         this.created_by_id = created_by_id;
         this.question_id = question_id;
         this.image = image;
     }
 
-    public Answer(int id, String image, String answer, Date created_date, Date edited_date, int question_id, int created_by_id) {
+    public Answer(int id, String code, String image, String answer, Date created_date, Date edited_date, int question_id, int created_by_id) {
         super();
         this.id = id;
+        this.code = code;
         this.answer = answer;
         this.image= image;
         this.created_date= created_date;
@@ -41,9 +44,10 @@ public class Answer {
         this.created_by_id = created_by_id;
     }
     
-    public Answer(int id, String image, String user, String answer, Date created_date, Date edited_date, int question_id, int created_by_id) {
+    public Answer(int id, String code, String image, String answer, String user, Date created_date, Date edited_date, int question_id, int created_by_id) {
         super();
         this.id = id;
+        this.code = code;
         this.answer = answer;
         this.image= image;
         this.user = user;
@@ -112,5 +116,12 @@ public class Answer {
 
     public Date getEditedDate() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public String getCode(){
+        return code;
+    }
+    public void setCode(String code){
+        this.code = code;
     }
 }

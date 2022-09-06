@@ -64,7 +64,7 @@
                                     <thead>
                                         <tr>
                                             <th>Code</th>
-                                            <th>Question</th>
+                                            <th>Answer</th>
                                             <th>Created By</th>
                                             <th>Created Date</th>
                                             <th>Edited Date</th>
@@ -74,7 +74,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Code</th>
-                                            <th>Question</th>
+                                            <th>Answer</th>
                                             <th>Created By</th>
                                             <th>Created Date</th>
                                             <th>Edited Date</th>
@@ -84,7 +84,7 @@
                                     <tbody>
                                         <c:forEach var="answer" items="${listAnswer}"> 
                                         <tr>
-                                            <td><a href="admin-question-detail-view?id=<c:out value='${answer.id}' />"><c:out value="${question.code}" /></a></td>
+                                            <td><a href="adminAnswerDetailview?id=<c:out value='${answer.id}' />"><c:out value="${answer.code}" /></a></td>
                                             <td><c:out value="${answer.answer}" /></td>
                                             <td><c:out value="${answer.created_by}" /></td>
                                             <td><c:out value="${answer.created_date}" /></td>
