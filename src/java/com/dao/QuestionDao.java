@@ -23,8 +23,8 @@ public class QuestionDao {
     private String user = "root";
     private String password = "mynewpassword";
 
-     private static final String INSERT_QUESTIONS_SQL = "INSERT INTO vsolution_question" + "  (question, image, created_date, edited_date, category_id, created_by_id) VALUES " +
-        " (?, ?, ?, ?, ?, ?);";
+     private static final String INSERT_QUESTIONS_SQL = "INSERT INTO vsolution_question" + "  (question, image, created_date, edited_date, category_id, created_by_id, code, semester, subject, faculty) VALUES " +
+        " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String SELECT_QUESTIONS_BY_ID = "select Q.id, code, question, image, fullname, profile, created_date, edited_date, category_id, created_by_id from vsolution_question  Q INNER JOIN users U ON Q.created_by_id=U.id where Q.id =?;";
     private static final String SELECT_ALL_QUESTIONS = "select * from vsolution_question INNER JOIN users ON vsolution_question.created_by_id=users.id;";
@@ -56,6 +56,10 @@ public class QuestionDao {
             preparedStatement.setDate(4, question.getEdited_date());
             preparedStatement.setInt(5, question.getCategory());
             preparedStatement.setInt(6, question.getCreated_by());
+            preparedStatement.setString(7, question.getCode());
+            preparedStatement.setString(8, question.getSemester());
+            preparedStatement.setString(9, question.getSubject());
+            preparedStatement.setString(10, question.getFaculty());
             preparedStatement.executeUpdate();
             
 

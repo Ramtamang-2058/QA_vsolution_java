@@ -1,0 +1,44 @@
+.textarea{
+    background-color: rgba(226, 226, 241, 0.692);
+    padding: 0.9rem;
+    /* display: grid; */
+    margin-left: 3rem;
+    margin-top: 1rem;
+    
+}
+textarea {
+    resize: vertical;
+  }
+.head{
+    margin-left: 2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+}
+.head1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+}
+.heading{
+    margin-left: 2rem;
+    font-weight: bolder;
+}
+.minihead{
+    margin-left: 2rem;
+}
+a{
+    text-decoration: none;
+    color: rgb(153, 150, 147);
+}
+.left{
+    margin-left: 2rem;
+    background-color: rgb(233, 233, 236);
+    padding: 3rem;
+    margin-right: 2rem;
+    
+}
+.email{
+    margin-left: 25.8rem;
+}
+.Prio{
+    margin-left: 23rem;
+}

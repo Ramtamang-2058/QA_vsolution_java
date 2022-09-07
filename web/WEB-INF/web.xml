@@ -119,6 +119,7 @@
         <servlet-name>AdminUserServlet</servlet-name>
         <url-pattern>/AdminUserServlet</url-pattern>
         <url-pattern>/admin-user-list</url-pattern>
+        <url-pattern>/userprofile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

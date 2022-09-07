@@ -84,8 +84,8 @@
                                     <tbody>
                                         <c:forEach var="usr" items="${listUser}"> 
                                         <tr>
-                                            <td><c:out value="${answer.code}" /></td>
-                                            <td><a href="adminAnswerDetailview?id=<c:out value='${ans.id}' />"><c:out value="${usr.fullname}" /></a></td>
+                                            <td><c:out value="${usr.id}" /></td>
+                                            <td><a href="userprofile?id=<c:out value='${usr.id}' />"><c:out value="${usr.fullname}" /></a></td>
                                             <td><c:out value="${usr.username}" /></td>
                                             <td><c:out value="${usr.email}" /></td>
                                             <td><c:out value="${usr.role}" /></td>

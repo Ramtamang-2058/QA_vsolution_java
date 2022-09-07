@@ -4,29 +4,30 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminQestionServlet.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/LogoutServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/config/DBConnection.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/MessageDao.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminUserServlet.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/nbproject/build-impl.xml</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/AnswerDao.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AnswerServlet.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/UserHome.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/MessageServlet.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/CategoryServlet.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/LogoutServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/UserServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/model/User.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/model/Message.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminUserServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/LoginServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/RegisterServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/LoginDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/QuestionDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/QuestionServlet.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/AnswerDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/UserDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminAnswerServlet.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AnswerServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/model/Question.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/UserHome.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/CategoryDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/model/Answer.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/model/Category.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/MessageServlet.java</file>
-            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/CategoryServlet.java</file>
         </group>
     </open-files>
 </project-private>

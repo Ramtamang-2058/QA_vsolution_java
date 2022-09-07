@@ -19,6 +19,9 @@ public class Question {
     protected String image;
     protected Date created_date;
     protected Date edited_date;
+    protected String semester;
+    protected String faculty;
+    protected String subject;
 
     public Question() {}
 
@@ -67,6 +70,19 @@ public class Question {
         this.edited_date = edited_date;
         this.category_id = category_id;
         this.created_by_id = created_by_id;
+    }
+
+    public Question(String text, String fileName, Date created_date, Date edited_date, int category_id, int created_by_id, String code, String semester, String subject, String faculty) {
+        this.question = text;
+        this.image = fileName;
+        this.created_date = created_date;
+        this.edited_date = edited_date;
+        this.category_id = category_id;
+        this.created_by_id = created_by_id;
+        this.semester = semester;
+        this.faculty = faculty;
+        this.subject = subject;
+        this.code = code;
     }
 
     public int getId() {
@@ -131,5 +147,27 @@ public class Question {
     }
     public void setCode(String code){
         this.code = code;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+    
+    public void setSemester(String semester){
+        this.semester=semester;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+    public void seSubject(String subject){
+        this.subject= subject;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+    public void setFaculty(String faculty){
+        this.faculty = faculty;
     }
 }

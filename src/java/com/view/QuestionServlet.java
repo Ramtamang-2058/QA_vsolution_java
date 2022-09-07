@@ -32,11 +32,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author ram
  */
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, //2mb
         maxFileSize = 1024 * 1024 * 10, //10mb
         maxRequestSize = 1024 * 1024 * 50)
-
 
 public class QuestionServlet extends HttpServlet {
 
@@ -94,9 +92,9 @@ public class QuestionServlet extends HttpServlet {
     private void listQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         HttpSession session = request.getSession();
-            session.setMaxInactiveInterval(10*60);
-        String userName=(String)session.getAttribute("User");  
-        String password = (String)session.getAttribute("password");
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
         User user = userDao.getUser(userName, password);
         List< Question> listQuestion = questionDao.selectAllQuestions();
         List< Category> listCategory = categoryDao.selectAllCategories();
@@ -111,39 +109,68 @@ public class QuestionServlet extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
         List< Category> listCategory = categoryDao.selectAllCategories();
+        String name = "#" + RandGeneratedStr();
         request.setAttribute("listCategory", listCategory);
+        request.setAttribute("ticket", name);
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        request.setAttribute("message", "Question ticket was created successfully.");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/new-questions.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
         int id = Integer.parseInt(request.getParameter("id"));
         Question existingQuestion = questionDao.selectQuestion(id);
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/new-questions.jsp");
         request.setAttribute("question", existingQuestion);
         dispatcher.forward(request, response);
 
     }
+
     private void insertQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+
         Date created_date = new Date(System.currentTimeMillis());
         Date edited_date = new Date(System.currentTimeMillis());
         String text = request.getParameter("question");
-        int category_id = Integer.parseInt(request.getParameter("categ"));
-        int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
-        try{
+        int category_id = Integer.parseInt(request.getParameter("category"));
+        int created_by_id = Integer.parseInt(request.getParameter("created_by"));
+        String code = request.getParameter("code");
+        String semester = request.getParameter("semester");
+        String faculty = request.getParameter("faculty");
+        String subject = request.getParameter("subject");
+        try {
             Part pic_part = null;
-            String name = "#" + RandGeneratedStr();
+            String name = code;
             pic_part = request.getPart("photo");
+            System.out.println("Part is: " + pic_part);
             String fileName = "/static/image/" + name + ".png";
+            System.out.println(code);
             String contextPath = new File("").getAbsolutePath();
-            String imageSavePath = "/home/ram/Downloads/javaproject/V2/web/static/image" + File.separator + fileName;
+            String imageSavePath = "/home/ram/Downloads/javaproject/V2/web" + File.separator + fileName;
             File fileSaveDir = new File(imageSavePath);
+            System.out.println("hi");
+            System.out.println(imageSavePath);
             pic_part.write(imageSavePath + File.separator);
-            Question newQuestion = new Question(name, text, fileName, created_date, edited_date, category_id, created_by_id);
-                        questionDao.insertQuestion(newQuestion);
+            System.out.println(imageSavePath);
+            Question newQuestion = new Question(text, fileName, created_date, edited_date, category_id, created_by_id, code, semester, subject, faculty);
+            questionDao.insertQuestion(newQuestion);
+            System.out.println("there");
             response.sendRedirect("list");
         } catch (Exception e) {
             System.out.println(e);
@@ -171,14 +198,14 @@ public class QuestionServlet extends HttpServlet {
         response.sendRedirect("list");
 
     }
-    static String RandGeneratedStr(){
+
+    static String RandGeneratedStr() {
         char[] chars = "abcdefghijklmnopqrstuvwxyzABSDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
         Random r = new Random(System.currentTimeMillis());
-        char[]id = new char[8];
-        for (int i = 0;  i < 8;  i++) {
+        char[] id = new char[8];
+        for (int i = 0; i < 8; i++) {
             id[i] = chars[r.nextInt(chars.length)];
         }
         return new String(id);
     }
 }
-

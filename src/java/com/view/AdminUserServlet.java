@@ -65,6 +65,9 @@ public class AdminUserServlet extends HttpServlet {
                 case "/user-update":
                     updateUser(request, response);
                     break;
+                case "/userprofile":
+                    userDetail(request, response);
+                    break;
                 case "/admin-user-list":
                     listUser(request, response);
                     break;
@@ -110,6 +113,24 @@ public class AdminUserServlet extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
+    
+    private void userDetail(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(10*60);
+        String userName=(String)session.getAttribute("User");  
+        String password = (String)session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
+        int id = Integer.parseInt(request.getParameter("id"));
+        User existingUser = userDao.selectUser(id);
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        request.setAttribute("usr", existingUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/userprofile.jsp");
+        dispatcher.forward(request, response);
+
+    }
+    
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         String fullname = request.getParameter("fullname");

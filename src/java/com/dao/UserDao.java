@@ -26,7 +26,7 @@ public class UserDao {
      private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (fullname, email, username, password, role, profile, faculty) VALUES " +
         " (?, ?, ?, ?, ?, ?, ?);";
 
-    private static final String SELECT_USERS_BY_ID = "select id, fullname, email, username, password, role, profile, faculty from users where id =?;";
+    private static final String SELECT_USERS_BY_ID = "select id, fullname, email, username, password, role, profile, semester, faculty from users where id =?;";
     private static final String SELECT_ALL_USERS = "select * from users;";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set fullname=?, email=?, username=?, password=?, role=?, profile=?, semester=?, faculty=? where id = ?;";

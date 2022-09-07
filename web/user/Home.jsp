@@ -443,7 +443,7 @@ body {
           </div>
 
           <div class="post__bottom">
-            <p><c:out value="${question.question}" /></p>
+               ${question.question}
           </div>
           
            <div class="post__image">
