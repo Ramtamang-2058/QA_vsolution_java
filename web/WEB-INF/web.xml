@@ -81,12 +81,16 @@
         <url-pattern>/QuestionServlet</url-pattern>
         <url-pattern>/new</url-pattern>
         <url-pattern>/insert</url-pattern>
+        <url-pattern>/edit-question</url-pattern>
+        <url-pattern>/update-question</url-pattern>
         <url-pattern>/question-list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnswerServlet</servlet-name>
         <url-pattern>/AnswerServlet</url-pattern>
-        <url-pattern>/viewAnswer</url-pattern>
+        <url-pattern>/view-Answer</url-pattern>
+        <url-pattern>/new-answer</url-pattern>
+        <url-pattern>/post-Answer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
@@ -96,6 +100,8 @@
         <servlet-name>MessageServlet</servlet-name>
         <url-pattern>/MessageServlet</url-pattern>
         <url-pattern>/message-list</url-pattern>
+        <url-pattern>/new-message</url-pattern>
+        <url-pattern>/my-messages</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminHome</servlet-name>

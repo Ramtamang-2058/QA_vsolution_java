@@ -23,13 +23,15 @@ public class Answer {
 
     public Answer() {}
 
-    public Answer(String code, String image, String answer, int question_id, int created_by_id) {
+    public Answer(String code, String image, String answer, Date created_date, Date edited_date, int created_by_id, int question_id) {
         super();
         this.answer = answer;
         this.code = code;
         this.created_by_id = created_by_id;
         this.question_id = question_id;
         this.image = image;
+        this.created_date= created_date;
+        this.edited_date = edited_date;
     }
 
     public Answer(int id, String code, String image, String answer, Date created_date, Date edited_date, int question_id, int created_by_id) {
@@ -98,7 +100,7 @@ public class Answer {
     public Date getEdited_date(){
         return edited_date;
     }
-    public void setEdited_ate(Date edited_date){
+    public void setEdited_date(Date edited_date){
         this.edited_date = edited_date;
     }
     
@@ -111,11 +113,18 @@ public class Answer {
     }
 
     public Date getCreatedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return created_date;
     }
-
+    public void setCreatedDate(Date created_date){
+        this.created_date=created_date;
+    }
+    
+    public void setEditedDate(Date edited_date){
+        this.edited_date=edited_date;
+    }
+    
     public Date getEditedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return edited_date;
     }
     
     public String getCode(){

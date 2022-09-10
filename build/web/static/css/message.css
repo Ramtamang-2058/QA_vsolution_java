@@ -148,7 +148,7 @@ body{
     color: #333333;
 }
 .chat-body .answer .time {
-    font-size: 16px;
+    font-size: 10px;
     line-height: 36px;
     position: relative;
     padding-bottom: 1px;

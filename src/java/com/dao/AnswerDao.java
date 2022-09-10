@@ -26,8 +26,8 @@ public class AnswerDao {
     Answer answers = null;
     
     //SQL queries
-    private static final String INSERT_ANSWERS_SQL = "INSERT INTO vsolution_answer" + "  (image, question, category_id, created_by_id) VALUES " +
-        " (?, ?, ?, ?);";
+    private static final String INSERT_ANSWERS_SQL = "INSERT INTO vsolution_answer" + "  (image, answer, created_date, edited_date, created_by_id, question_id) VALUES " +
+        " (?, ?, ?, ?, ?, ?);";
 
     private static final String SELECT_ANSWERS_BY_ID = "select id, code, image, answer, created_date, edited_date, category_id, created_by_id from vsolution_answer where id =?;";
     private static final String SELECT_ALL_ANSWERS = "select * from vsolution_answer";
@@ -71,8 +71,11 @@ public class AnswerDao {
             preparedStatement = con.prepareStatement(INSERT_ANSWERS_SQL);
             preparedStatement.setString(1, answer.getAnswer());
             preparedStatement.setString(2, answer.getImage());
-            preparedStatement.setInt(2, answer.getCreated_by());
-            preparedStatement.setInt(4, answer.getQuestion());
+            preparedStatement.setDate(3, answer.getCreatedDate());
+            preparedStatement.setDate(4, answer.getEditedDate());
+            preparedStatement.setInt(5, answer.getCreated_by());
+            preparedStatement.setInt(6, answer.getQuestion());
+            preparedStatement.executeUpdate();
             
 
         }catch (SQLException e) {

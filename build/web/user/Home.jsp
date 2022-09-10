@@ -438,6 +438,7 @@ body {
             />
             <div class="post__topInfo">
               <h3><c:out value="${question.user}" /></h3>
+               <a href="edit-question?id=<c:out value='${question.id}' />" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
               <p><c:out value="${question.created_date}" /></p>
             </div>
           </div>

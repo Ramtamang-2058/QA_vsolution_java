@@ -74,16 +74,10 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>FAQs</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#collapsePages">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
+               <li class="nav-item">
+                <a class="nav-link" href="my-messages" action="/my-messages">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Message</span></a>
             </li>
 
             <!-- Divider -->

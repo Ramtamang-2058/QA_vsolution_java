@@ -17,6 +17,7 @@ import javax.servlet.annotation.MultipartConfig;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,10 +70,13 @@ public class QuestionServlet extends HttpServlet {
                 case "/delete":
                     deleteQuestion(request, response);
                     break;
-                case "/edit":
+                case "/edit-question":
+                    System.out.println("fafdasdfsadf");
                     showEditForm(request, response);
                     break;
-                case "/update":
+                case "/update-question":
+                            System.out.println("fafdasdfsadf");
+
                     updateQuestion(request, response);
                     break;
                 case "/question-list":
@@ -133,7 +137,10 @@ public class QuestionServlet extends HttpServlet {
         String password = (String) session.getAttribute("password");
         User user = userDao.getUser(userName, password);
         int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("user:" + user);
         Question existingQuestion = questionDao.selectQuestion(id);
+        List< Category> listCategory = categoryDao.selectAllCategories();
+        request.setAttribute("listCategory", listCategory);
         request.setAttribute("userName", userName);
         request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/new-questions.jsp");
@@ -179,16 +186,42 @@ public class QuestionServlet extends HttpServlet {
 
     private void updateQuestion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ParseException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
+        System.out.println("update servlet");
         int id = Integer.parseInt(request.getParameter("id"));
-        String text = request.getParameter("question");
-        String image = request.getParameter("image");
+//        SimpleDateFormat formatter2=new SimpleDateFormat("dd-MMM-yyyy");  
         Date edited_date = new Date(System.currentTimeMillis());
-        int category_id = Integer.parseInt(request.getParameter("category_id"));
-        int created_by_id = Integer.parseInt(request.getParameter("created_by_id"));
+//        Date created_date=(Date) formatter2.parse(created);
+        String text = request.getParameter("question");
+        int category_id = Integer.parseInt(request.getParameter("category"));
+        int created_by_id = Integer.parseInt(request.getParameter("created_by"));
+        String code = request.getParameter("code");
+        String semester = request.getParameter("semester");
+        String faculty = request.getParameter("faculty");
+        String subject = request.getParameter("subject");
+        try {
+            Part pic_part = null;
+            String name = code;
+            pic_part = request.getPart("photo");
+            String fileName = "/static/image/" + name + ".png";
+            String contextPath = new File("").getAbsolutePath();
+            String imageSavePath = "/home/ram/Downloads/javaproject/V2/web" + File.separator + fileName;
+            File fileSaveDir = new File(imageSavePath);
+            System.out.println(imageSavePath);
+            pic_part.write(imageSavePath + File.separator);
+            System.out.println("Hellow");
+            System.out.println(imageSavePath);
+            Question question = new Question(id, text, fileName, edited_date, category_id, created_by_id, code, semester, subject, faculty);
+            questionDao.updateQuestion(question);
+            response.sendRedirect("question-list");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-        Question question = new Question(id, text, image, edited_date, category_id, created_by_id);
-        questionDao.updateQuestion(question);
-        response.sendRedirect("list");
     }
 
     private void deleteQuestion(HttpServletRequest request, HttpServletResponse response)

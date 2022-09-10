@@ -26,10 +26,10 @@ public class QuestionDao {
      private static final String INSERT_QUESTIONS_SQL = "INSERT INTO vsolution_question" + "  (question, image, created_date, edited_date, category_id, created_by_id, code, semester, subject, faculty) VALUES " +
         " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    private static final String SELECT_QUESTIONS_BY_ID = "select Q.id, code, question, image, fullname, profile, created_date, edited_date, category_id, created_by_id from vsolution_question  Q INNER JOIN users U ON Q.created_by_id=U.id where Q.id =?;";
+    private static final String SELECT_QUESTIONS_BY_ID = "select Q.id, code, question, image, fullname, profile, created_date, edited_date, category_id, created_by_id, code, Q.semester, subject, Q.faculty from vsolution_question  Q INNER JOIN users U ON Q.created_by_id=U.id where Q.id =?;";
     private static final String SELECT_ALL_QUESTIONS = "select * from vsolution_question INNER JOIN users ON vsolution_question.created_by_id=users.id;";
     private static final String DELETE_QUESTIONS_SQL = "delete from questions where id = ?;";
-    private static final String UPDATE_QUESTIONS_SQL = "update vsolution_question set question = ?, image= ?, edited_date=?, category_id =?, created_by_id=? where id = ?;";
+    private static final String UPDATE_QUESTIONS_SQL = "update vsolution_question set question=?, image=?, edited_date=?, category_id=?, created_by_id=?, code=?, semester=?, subject=?, faculty=? where id = ?;";
 
     public QuestionDao(){}
 
@@ -52,14 +52,13 @@ public class QuestionDao {
         ){
             preparedStatement.setString(1, question.getQuestion());
             preparedStatement.setString(2, question.getImage());
-            preparedStatement.setDate(3, question.getCreated_date());
-            preparedStatement.setDate(4, question.getEdited_date());
-            preparedStatement.setInt(5, question.getCategory());
-            preparedStatement.setInt(6, question.getCreated_by());
-            preparedStatement.setString(7, question.getCode());
-            preparedStatement.setString(8, question.getSemester());
-            preparedStatement.setString(9, question.getSubject());
-            preparedStatement.setString(10, question.getFaculty());
+            preparedStatement.setDate(3, question.getEdited_date());
+            preparedStatement.setInt(4, question.getCategory());
+            preparedStatement.setInt(5, question.getCreated_by());
+            preparedStatement.setString(6, question.getCode());
+            preparedStatement.setString(7, question.getSemester());
+            preparedStatement.setString(8, question.getSubject());
+            preparedStatement.setString(9, question.getFaculty());
             preparedStatement.executeUpdate();
             
 
@@ -89,7 +88,10 @@ public class QuestionDao {
                 Date edited_date = rs.getDate("edited_Date");
                 int category_id = rs.getInt("category_id");
                 int created_by_id = rs.getInt("created_by_id");
-                question = new Question(id, code, text, image, fullname, profile, created_date, edited_date, category_id, created_by_id);
+                String semester = rs.getString("semester");
+                String subject = rs.getString("subject");
+                String faculty = rs.getString("faculty");
+                question = new Question(id, code, text, image, fullname, profile, created_date, edited_date, category_id, created_by_id, semester, subject, faculty);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -122,7 +124,10 @@ public class QuestionDao {
                 Date edited_date = rs.getDate("edited_Date");
                 int category_id = rs.getInt("category_id");
                 int created_by_id = rs.getInt("created_by_id");
-                questions.add(new Question(id, code, text, image, username, profile, created_date, edited_date, category_id, created_by_id));
+                String semester = rs.getString("semester");
+                String subject = rs.getString("subject");
+                String faculty = rs.getString("faculty");
+                questions.add(new Question(id, code, text, image, username, profile, created_date, edited_date, category_id, created_by_id, semester, subject, faculty));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -142,17 +147,21 @@ public class QuestionDao {
     public boolean updateQuestion(Question question) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(UPDATE_QUESTIONS_SQL);) {
-            statement.setString(1, question.getQuestion());
-            statement.setString(2, question.getImage());
-            statement.setDate(3, question.getCreated_date());
-            statement.setDate(4, question.getEdited_date());
-            statement.setInt(5, question.getCategory());
-            statement.setInt(6, question.getCreated_by());
-            statement.setInt(7, question.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUESTIONS_SQL);) {
+            preparedStatement.setString(1, question.getQuestion());
+            preparedStatement.setString(2, question.getImage());
+            preparedStatement.setDate(3, question.getEdited_date());
+            preparedStatement.setInt(4, question.getCategory());
+            preparedStatement.setInt(5, question.getCreated_by());
+            preparedStatement.setString(6, question.getCode());
+            preparedStatement.setString(7, question.getSemester());
+            preparedStatement.setString(8, question.getSubject());
+            preparedStatement.setString(9, question.getFaculty());
+            preparedStatement.setInt(10, question.getId());
+            preparedStatement.executeUpdate();
 
 
-            rowUpdated = statement.executeUpdate() > 0;
+            rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;
     }

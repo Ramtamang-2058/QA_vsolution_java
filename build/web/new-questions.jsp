@@ -67,8 +67,10 @@
 
                 </div>
                 <!-- End of Main Content --><div class="container col-md-5">
-                    <h1 class="heading" style="color: blue; font-size: 20px;">Ticket ID: <c:out value='${ticket}' /></h1>
-                    <h1 class="heading">Opened Question Ticket</h1>
+                    <c:if test="${question == null}">
+                        <h1 class="heading" style="color: blue; font-size: 20px;">Ticket ID: <c:out value='${ticket}' /></h1>
+                        <h1 class="heading">Opened Question Ticket</h1>
+                    </c:if>
                     <div class="minihead">
                         <!-- <div>
                            <form class="left">
@@ -82,45 +84,48 @@
                                 <input type="email" size="50" height="50">
                             </form> -->
                         <!-- </div> -->
-                        <c:if test="${message != null}">
-                            <div classs="container p-5">
-                                <div class="row no-gutters">
-                                    <div class="col-lg-6 col-md-12 m-auto">
-                                        <div class="alert alert-success fade show" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="True">&times;</span>
-                                            </button>
-                                            <h4 class="alert-heading">Well done!</h4>
-                                            <p>Ticket was created successfully !</p>
+                        <c:if test="${question == null}">
+                            <c:if test="${message != null}">
+                                <div classs="container p-5">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-6 col-md-12 m-auto">
+                                            <div class="alert alert-success fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="True">&times;</span>
+                                                </button>
+                                                <h4 class="alert-heading">Well done!</h4>
+                                                <p>Ticket was created successfully !</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:if>
                         </c:if>
-
                         <div id="form" class="container  p-5">
                             <c:if test="${question != null}">
-                                <form class="justify-content-md-cente" action="update" method="post" enctype="multipart/form-data">
+                                <form class="justify-content-md-cente" action="update-question" method="post" enctype="multipart/form-data">
+                                    <input name="code" type="hidden" value="<c:out value="${question.code}"/>">
                                 </c:if>
                                 <c:if test="${question == null}">
                                     <form class="justify-content-md-cente" action="insert" method="post" enctype="multipart/form-data">
+                                        <input name="code" type="hidden" value="<c:out value="${ticket}"/>">
                                     </c:if>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <input type="hidden" name="id" value="<c:out value='${question.id}' />" />
-                                            <input name="code" type="hidden" value="<c:out value="${ticket}"/>">
+
                                             <input name="created_by" type="hidden" value="<c:out value="${user.id}"/>">
                                             <label class="font-weight-bold" for="this">Faculty</label>
-                                            <select name="faculty" class="form-control-lg form-control bolder" id="this" aria-label=".form-select-lg example" value="<c:out value="${question.faculty}"/>">
-                                                <option selected>Choose faculty</option>
+                                            <select name="faculty" class="form-control-lg form-control bolder" id="this" aria-label=".form-select-lg example">
+                                                <option selected>${question.faculty}</option>
                                                 <option value="MBA">MBA</option>
                                                 <option value="BICT">BICT</option>
                                             </select>   
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="font-weight-bold" for="this">Semester</label>
-                                            <select name="semester" class="form-control-lg form-control bolder" id="this" aria-label=".form-select-lg example" value="<c:out value="${question.semester}"/>">
-                                                <option selected>Choose semester</option>
+                                            <select name="semester" class="form-control-lg form-control bolder" id="this" aria-label=".form-select-lg example">
+                                                <option selected>${question.semester}</option>
                                                 <option value="1-semester">1-semester</option>
                                                 <option value="2-semester">2-semester</option>
                                                 <option value="3-semester">3-semester</option>
@@ -133,8 +138,8 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="font-weight-bold" for="inputCity">Subject</label>
-                                            <select name="subject" class="form-control-lg form-control bolder" id="this" aria-label=".form-select-lg example" value="<c:out value="${question.subject}"/>">
-                                                <option selected>Choose semester</option>
+                                            <select name="subject" class="form-control-lg form-control bolder" id="this" aria-label=".form-select-lg example" value="${question.subject}">
+                                                <option selected>${question.subject}</option>
                                                 <option value="RTS300">Real Time System</option>
                                                 <option value="FSP202">Critical Thinking</option>
                                                 <option value="SAD302">Agile Development</option>
@@ -147,24 +152,25 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="font-weight-bold" for="inputCity">Category</label>
-                                            <select  class="form-control-lg form-control bolder" name="category" value="<c:out value="${question.category}"/>>
+                                            <select  class="form-control-lg form-control bolder" name="category" value="${question.category}>
                                                      <c:forEach var="categry" items="${listCategory}">
                                                          <option value="${categry.id}">${categry.name}</option>
                                                      </c:forEach>
                                             </select>
-                                            <input type="hidden" value="<c:out value='${question.created_date}' />" class="form-control" name="edited_date">
+                                            <input type="hidden" value="<c:out value='${question.created_date}' />" class="form-control" name="created_date">
                                             <input type="hidden" value="<c:out value='${question.edited_date}' />" class="form-control" name="edited_date">
                                         </div>
                                     </div>
                                     </div>
                                     <div class="textarea">
                                         <div class="form-group col-md-15 form-row">
-                                            <label class="font-weight-bold" for="inputCity">Images</label>
-                                            <input type="file" name="photo" class="form-control-lg form-control bolder">
+                                            <label class="font-weight-bold" for="inputCity">Images: <%=request.getContextPath()%>${question.image}</label>
+                                            <input type="file" name="photo" class="form-control-lg form-control bolder" src="${question.image}">
                                         </div>
                                         <h4 class="head1">Message</h4>
-                                        <textarea name="question" id="default" class="textarea"  value="<c:out value='${question.question}' />">
-                  
+
+                                        <textarea name="question" id="default" class="textarea">
+                                            ${question.question}
                                         </textarea>
 
                                     </div>

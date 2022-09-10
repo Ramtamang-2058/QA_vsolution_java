@@ -58,7 +58,7 @@ public class Question {
         this.created_by_id = created_by_id;
     }
     
-    public Question(int id, String code, String question, String image, String user, String profile, Date created_date, Date edited_date, int category_id, int created_by_id) {
+    public Question(int id, String code, String question, String image, String user, String profile, Date created_date, Date edited_date, int category_id, int created_by_id, String semester, String subject, String faculty) {
         super();
         this.id = id;
         this.code = code;
@@ -70,6 +70,9 @@ public class Question {
         this.edited_date = edited_date;
         this.category_id = category_id;
         this.created_by_id = created_by_id;
+        this.semester = semester;
+        this.faculty = faculty;
+        this.subject = subject;
     }
 
     public Question(String text, String fileName, Date created_date, Date edited_date, int category_id, int created_by_id, String code, String semester, String subject, String faculty) {
@@ -84,7 +87,18 @@ public class Question {
         this.subject = subject;
         this.code = code;
     }
-
+    public Question(int id, String text, String fileName,  Date edited_date, int category_id, int created_by_id, String code, String semester, String subject, String faculty) {
+        this.id = id;
+        this.question = text;
+        this.image = fileName;
+        this.edited_date = edited_date;
+        this.category_id = category_id;
+        this.created_by_id = created_by_id;
+        this.semester = semester;
+        this.faculty = faculty;
+        this.subject = subject;
+        this.code = code;
+    }
     public int getId() {
         return id;
     }

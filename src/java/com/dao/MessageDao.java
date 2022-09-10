@@ -25,8 +25,8 @@ public class MessageDao {
     private String user = "root";
     private String password = "mynewpassword";
 
-     private static final String INSERT_MESSAGES_SQL = "INSERT INTO vsolution_message" + "  (message, image, created_date, edited_date, category_id, created_by_id) VALUES " +
-        " (?, ?, ?, ?, ?, ?);";
+     private static final String INSERT_MESSAGES_SQL = "INSERT INTO vsolution_message" + "  (message, created_date, edited_date, receive_by_id, send_by_id) VALUES " +
+        " (?, ?, ?, ?, ?);";
 
     private static final String SELECT_MESSAGES_BY_ID = "select id, message, created_date, edited_date, receive_by_id, send_by_id from vsolution_message where id =?;";
     private static final String SELECT_ALL_MESSAGES = "select * from vsolution_message INNER JOIN users ON vsolution_message.created_by_id=users.id INNER JOIN users ON vsolution_message.receive_by_id=users.id WHERE id=?;";

@@ -1,82 +1,108 @@
 <%-- 
-    Document   : Message
-    Created on : Sep 2, 2022, 11:06:57 AM
+    Document   : new-answers
+    Created on : Aug 16, 2022, 10:55:26 PM
     Author     : ram
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
- pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-        <html>
 
-        <head>
-            <title>User Management Application</title>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        </head>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-        <body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
 
-            <header>
-                <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
-                    <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> Book
-     Management App </a>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/text.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/messagelist.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.tiny.cloud/1/kuhw6714mg0yfaluqlt0sqwy30y4w54fbmacma45ipgfhbfg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+        <title>SB Admin 2 - Blank</title>
+
+        <!-- Custom fonts for this template-->
+        <%@ include file = "header.jsp" %>
+
+    </head>
+
+    <body id="page-top">
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <%@ include file = "sidebar.jsp" %>
+
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+
+                    <!-- Topbar Navbar -->
+                    <%@ include file = "navbar.jsp" %>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="chat_container">
+                                <div class="job-box">
+                                    <div class="inbox-message">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="message-avatar">
+                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                    </div>
+                                                    <div class="message-body">
+                                                        <div class="message-body-heading">
+                                                            <h5>Daniel Dock <span class="unread">Unread</span></h5>
+                                                            <span>7 hours ago</span>
+                                                        </div>
+                                                        <p>Hello, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor....</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Footer -->
+                    <%@ include file = "footer.jsp" %>
 
-                    <ul class="navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>/book" class="nav-link">Book</a></li>
-                    </ul>
-                </nav>
-            </header>
-            <br>
-
-            <div class="row">
-                <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
-
-                <div class="container">
-                    <h3 class="text-center">List of Books</h3>
-                    <hr>
-                    <div class="container text-left">
-
-                        <a href="<%=request.getContextPath()%>/newbook" class="btn btn-success">Add
-     New Book</a>
-                    </div>
-                    <br>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Author</th>
-                                <th>Publication</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--   for (Todo todo: todos) {  -->
-                            <c:forEach var="book" items="${listMessage}">
-
-                                <tr>
-                                    <td>
-                                        <c:out value="${book.id}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${book.message}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${book.user}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${book.receiver}" />
-                                    </td>
-                                    
-                                </tr>
-                            </c:forEach>
-                            <!-- } -->
-                        </tbody>
-
-                    </table>
                 </div>
-            </div>
-        </body>
+                <!-- End of Content Wrapper -->
 
-        </html>
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Logout Modal-->
+            <%@ include file = "logout.jsp" %>
+
+            <!-- Bootstrap core JavaScript-->
+            <%@ include file = "scripts.jsp" %>
+
+    </body>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+            toolbar_mode: 'floating',
+        });
+    </script>
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+</html>
