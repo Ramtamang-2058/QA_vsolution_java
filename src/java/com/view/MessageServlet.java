@@ -138,7 +138,7 @@ public class MessageServlet extends HttpServlet {
         int receive_by_id = Integer.parseInt(request.getParameter("receiver"));
         Message newMessage = new Message(text, created_date, edited_date, receive_by_id, send_by_id);
         messageDao.insertMessage(newMessage);
-      response.sendRedirect("message-list?id1=1&id2=2");
+      response.sendRedirect("message-list?id1="+ receive_by_id+ "&id2=" + send_by_id);
     }
     
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)

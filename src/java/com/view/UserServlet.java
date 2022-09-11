@@ -100,9 +100,14 @@ public class UserServlet extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        List< Category> listCategory = categoryDao.selectAllCategories();
-        request.setAttribute("listCategory", listCategory);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/new-users.jsp");
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
+        String faculty = request.getParameter("faculty");
+        String semester = request.getParameter("semester");
+        String password = request.getParameter("password");
+        String role = "User";
+        String fullname = first_name + last_name;
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Register.jsp");
         dispatcher.forward(request, response);
     }
 

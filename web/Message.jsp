@@ -51,24 +51,29 @@
                         <div class="row">
                             <div class="chat_container">
                                 <div class="job-box">
+                                                                                                            <c:forEach var="usr" items="${listUser}"> 
+
                                     <div class="inbox-message">
                                         <ul>
-                                            <li>
-                                                <a href="#">
+                                            <li style="width: 800px;">
+                                                <a href="<%=request.getContextPath()%>/message-list?id1=${usr.id}&id2=${user.id}">
                                                     <div class="message-avatar">
                                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                                     </div>
                                                     <div class="message-body">
                                                         <div class="message-body-heading">
-                                                            <h5>Daniel Dock <span class="unread">Unread</span></h5>
-                                                            <span>7 hours ago</span>
+                                                            <h5>${usr.fullname} <span class="unread">messages</span></h5>
+                                                            <span>${usr.username}</span>
                                                         </div>
-                                                        <p>Hello, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor....</p>
+                                                        <p>${usr.faculty}, ${usr.semester}.</p>
+                                                        <p> view your message....</p>
                                                     </div>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
+                                                                          </c:forEach>
+
                                 </div>
                             </div>
                         </div>

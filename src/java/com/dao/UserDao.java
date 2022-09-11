@@ -23,8 +23,8 @@ public class UserDao {
     private String user = "root";
     private String password = "mynewpassword";
 
-     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (fullname, email, username, password, role, profile, faculty) VALUES " +
-        " (?, ?, ?, ?, ?, ?, ?);";
+     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (fullname, email, username, password, role, profile, semester, faculty) VALUES " +
+        " (?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String SELECT_USERS_BY_ID = "select id, fullname, email, username, password, role, profile, semester, faculty from users where id =?;";
     private static final String SELECT_ALL_USERS = "select * from users;";
@@ -58,8 +58,8 @@ public class UserDao {
             preparedStatement.setString(4, user.getPassword());
             preparedStatement.setString(5, user.getRole());
             preparedStatement.setString(6, user.getProfile());
-            preparedStatement.setString(6, user.getSemester());
-            preparedStatement.setString(6, user.getFaculty());
+            preparedStatement.setString(7, user.getSemester());
+            preparedStatement.setString(8, user.getFaculty());
             preparedStatement.executeUpdate();
             
 
