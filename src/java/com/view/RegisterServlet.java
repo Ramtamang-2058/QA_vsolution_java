@@ -83,5 +83,10 @@ public class RegisterServlet extends HttpServlet {
             dispatcher.forward(request, response);
         }
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+    request.getRequestDispatcher("/Register.jsp").forward(request, response);
+    }
 
 }

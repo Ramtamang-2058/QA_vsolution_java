@@ -55,7 +55,7 @@ body{
     font-size:1rem;
     font-weight:400;
     line-height:1.5;
-    color:#858796;
+    color:black;
     text-align:left;
     background-color:#fff
 }
@@ -1287,16 +1287,16 @@ pre code{
 .table{
     width:100%;
     margin-bottom:1rem;
-    color:#858796
+    color:black
 }
 .table td,.table th{
     padding:.75rem;
     vertical-align:top;
-    border-top:1px solid #e3e6f0
+    border-top:1px solid black
 }
 .table thead th{
     vertical-align:bottom;
-    border-bottom:2px solid #e3e6f0
+    border-bottom:2px solid black
 }
 .table tbody+tbody{
     border-top:2px solid #e3e6f0
@@ -3286,8 +3286,7 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
     display:block
 }
 .navbar{
-    position:;
-    ;
+    position:relative;
     display:flex;
     flex-wrap:wrap;
     align-items:center;

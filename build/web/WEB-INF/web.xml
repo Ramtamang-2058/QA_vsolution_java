@@ -52,6 +52,26 @@
         <servlet-name>AdminUserServlet</servlet-name>
         <servlet-class>com.view.AdminUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ValidateOtp</servlet-name>
+        <servlet-class>com.view.ValidateOtp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewPassword</servlet-name>
+        <servlet-class>com.view.NewPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckUserServlet</servlet-name>
+        <servlet-class>com.view.CheckUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Glogin</servlet-name>
+        <servlet-class>com.view.Glogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IdTokenVerifierAndParser</servlet-name>
+        <servlet-class>com.view.IdTokenVerifierAndParser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -126,6 +146,26 @@
         <url-pattern>/AdminUserServlet</url-pattern>
         <url-pattern>/admin-user-list</url-pattern>
         <url-pattern>/userprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidateOtp</servlet-name>
+        <url-pattern>/ValidateOtp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewPassword</servlet-name>
+        <url-pattern>/NewPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckUserServlet</servlet-name>
+        <url-pattern>/CheckUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Glogin</servlet-name>
+        <url-pattern>/Glogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IdTokenVerifierAndParser</servlet-name>
+        <url-pattern>/IdTokenVerifierAndParser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

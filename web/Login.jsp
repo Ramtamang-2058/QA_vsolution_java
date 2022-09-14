@@ -20,6 +20,8 @@
     <title>SB Admin 2 - Login</title>
 
     <!-- Custom fonts for this template-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -27,7 +29,11 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/sb-admin-2.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/vendor/fontawesome-free/css/all.min.css">
-
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+     content="<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+     content="928543276217-chqj9oam8f18aiul3uva3630d6cd0jkn.apps.googleusercontent.com">
 
 </head>
 
@@ -44,7 +50,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <img class="col-lg-5 d-none d-lg-block bg-register-image" src="static/img/bg2.webp">
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -65,12 +71,12 @@
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
-                                                <span> <%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
+                                                <span style="color: red"> <%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
                                             </div>
                                         </div>
                                             <input class="btn btn-primary btn-user btn-block" type="submit" value="Login"></input>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <a data-onsuccess="onSignIn" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
@@ -96,6 +102,31 @@
 
     </div>
 
+  <script>
+      //google callback. This function will redirect to our login servlet
+      function onSignIn(googleUser) {
+         var profile = googleUser.getBasicProfile();
+         console.log('ID: ' + profile.getId());
+         console.log('Name: ' + profile.getName());
+         console.log('Image URL: ' + profile.getImageUrl());
+         console.log('Email: ' + profile.getEmail());
+         console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+
+         //do not post all above info to the server because that is not secure.
+         //just send the id_token
+
+         var redirectUrl = 'login';
+
+         //using jquery to post data dynamically
+         var form = $('<form action="' + redirectUrl + '" method="post">' +
+                          '<input type="text" name="id_token" value="' +
+                           googleUser.getAuthResponse().id_token + '" />' +
+                                                                '</form>');
+         $('body').append(form);
+         form.submit();
+      }
+
+   </script>
     <!-- Bootstrap core JavaScript-->
     <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

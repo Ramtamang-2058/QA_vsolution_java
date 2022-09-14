@@ -30,7 +30,12 @@
 
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <%@include file= "../sidebar.jsp" %>
+            <<c:if test="${user.role == 'Admin'}">
+                <%@ include file = "adminSidebar.jsp" %>
+            </c:if>
+            <c:if test="${user.role == 'User'}">
+                <%@ include file = "sidebar.jsp" %>
+            </c:if>
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -434,8 +439,9 @@
 
                                             <div class="post__topInfo">
                                                 <h3><c:out value="${answer.user}" /></h3>
+                                                 <c:if test="${answer.created_by == user.id}">
                                                 <a href="edit-question?id=<c:out value='${answer.id}' />" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
-                                                <p><c:out value="${answer.created_date}" /></p>
+                                                 </c:if> <p><c:out value="${answer.created_date}" /></p>
                                             </div>
                                         </div>
 

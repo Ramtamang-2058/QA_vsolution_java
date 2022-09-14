@@ -30,7 +30,12 @@ if((request.getSession(false).getAttribute("User")== null) )
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-      <jsp:include page="../sidebar.jsp" />
+      <c:if test="${user.role == 'Admin'}">
+                <%@ include file = "adminSidebar.jsp" %>
+            </c:if>
+            <c:if test="${user.role == 'User'}">
+                <%@ include file = "sidebar.jsp" %>
+            </c:if>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -438,8 +443,10 @@ body {
             />
             <div class="post__topInfo">
               <h3><c:out value="${question.user}" /></h3>
+               <c:if test="${question.created_by == user.id}">
                <a href="edit-question?id=<c:out value='${question.id}' />" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
-              <p><c:out value="${question.created_date}" /></p>
+               </c:if>
+               <p><c:out value="${question.created_date}" /></p>
             </div>
           </div>
 

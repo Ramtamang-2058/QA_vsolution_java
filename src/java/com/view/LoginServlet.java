@@ -49,7 +49,7 @@ System.out.println("Inside servlet");
             session.setAttribute("User", userName);
             session.setAttribute("password", password);
             request.setAttribute("userName", userName);
-            response.sendRedirect("admin-question-list");
+            response.sendRedirect("AdminHome");
         }
         else if(userValidate.equals("Editor_Role"))
         {

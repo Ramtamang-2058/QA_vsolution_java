@@ -33,8 +33,12 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <%@ include file = "sidebar.jsp" %>
-
+<c:if test="${user.role == 'Admin'}">
+                <%@ include file = "adminSidebar.jsp" %>
+            </c:if>
+            <c:if test="${user.role == 'User'}">
+                <%@ include file = "sidebar.jsp" %>
+            </c:if>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">

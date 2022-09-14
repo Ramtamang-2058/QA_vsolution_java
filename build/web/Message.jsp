@@ -33,9 +33,12 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <%@ include file = "sidebar.jsp" %>
-
-
+            <c:if test="${user.role == 'Admin'}">
+                <%@ include file = "adminSidebar.jsp" %>
+            </c:if>
+            <c:if test="${user.role == 'User'}">
+                <%@ include file = "sidebar.jsp" %>
+            </c:if>
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -45,34 +48,35 @@
                     <!-- Topbar -->
 
                     <!-- Topbar Navbar -->
+
                     <%@ include file = "navbar.jsp" %>
 
                     <div class="container">
                         <div class="row">
                             <div class="chat_container">
                                 <div class="job-box">
-                                                                                                            <c:forEach var="usr" items="${listUser}"> 
+                                    <c:forEach var="usr" items="${listUser}"> 
 
-                                    <div class="inbox-message">
-                                        <ul>
-                                            <li style="width: 800px;">
-                                                <a href="<%=request.getContextPath()%>/message-list?id1=${usr.id}&id2=${user.id}">
-                                                    <div class="message-avatar">
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                                    </div>
-                                                    <div class="message-body">
-                                                        <div class="message-body-heading">
-                                                            <h5>${usr.fullname} <span class="unread">messages</span></h5>
-                                                            <span>${usr.username}</span>
+                                        <div class="inbox-message">
+                                            <ul>
+                                                <li style="width: 800px;">
+                                                    <a href="<%=request.getContextPath()%>/message-list?id1=${usr.id}&id2=${user.id}">
+                                                        <div class="message-avatar">
+                                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                                         </div>
-                                                        <p>${usr.faculty}, ${usr.semester}.</p>
-                                                        <p> view your message....</p>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                                                          </c:forEach>
+                                                        <div class="message-body">
+                                                            <div class="message-body-heading">
+                                                                <h5>${usr.fullname} <span class="unread">messages</span></h5>
+                                                                <span>${usr.username}</span>
+                                                            </div>
+                                                            <p>${usr.faculty}, ${usr.semester}.</p>
+                                                            <p> view your message....</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </c:forEach>
 
                                 </div>
                             </div>
