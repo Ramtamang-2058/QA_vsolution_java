@@ -7,6 +7,7 @@ Vsolution helps people ﬁnd the answers they need, when they need them. We're b
 4. JDBC, Tiny mice, Chart js
 5. Apache Tomcat server
 6. Netbeans IDE
+
 Vsolution is a knowledge management system for a college and schools. Vsolution is a system for transferring information from one person, group to another. It is a mean for people to exchange knowledge. Vsolution is an application which uses technologies to bring people and ideas and solution to solve the problem and help each other to solve the problems. In this application users can request for register themselves to the college or admin. Here, the user will be able to login only after registering and approved by the admin or college. Students can post, questions and answer, communicate with others for questions and answers, they can ﬁlter the question and answer of speciﬁc course, subject, author, category, semester, date and time etc.
 
 It is focus on students and teachers where students can post the question and other experts friends, senior and teacher can answer it. All the data and information are store in database. System will recommended the students to follow the respective teachers, experts and ﬁlter the answer.
