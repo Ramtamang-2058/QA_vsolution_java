@@ -24,14 +24,13 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
  *
  * @author ram
  */
-
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, //2mb
         maxFileSize = 1024 * 1024 * 10, //10mb
         maxRequestSize = 1024 * 1024 * 50)
@@ -113,13 +112,20 @@ public class UserServlet extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
         int id = Integer.parseInt(request.getParameter("id"));
         User existingUser = userDao.selectUser(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/new-users.jsp");
-        request.setAttribute("user", existingUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/profileUpdate.jsp");
+        request.setAttribute("usr", existingUser);
+        request.setAttribute("user", user);
         dispatcher.forward(request, response);
 
     }
+
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         String fullname = request.getParameter("fullname");
@@ -129,9 +135,9 @@ public class UserServlet extends HttpServlet {
         String role = request.getParameter("role");
         String semester = request.getParameter("semester");
         String faculty = request.getParameter("faculty");
-        try{
+        try {
             Part pic_part = null;
-            pic_part = request.getPart("profile");
+            pic_part = request.getPart("image");
             String fileName = "/static/user/profile/" + username + ".png";
             String contextPath = new File("").getAbsolutePath();
             System.out.println("Context Path: " + contextPath);
@@ -139,7 +145,7 @@ public class UserServlet extends HttpServlet {
             File fileSaveDir = new File(imageSavePath);
             pic_part.write(imageSavePath + File.separator);
             User newUser = new User(fullname, email, username, password, role, fileName, semester, faculty);
-                        userDao.insertUser(newUser);
+            userDao.insertUser(newUser);
             response.sendRedirect("list");
         } catch (Exception e) {
             System.out.println(e);
@@ -149,18 +155,42 @@ public class UserServlet extends HttpServlet {
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ParseException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
-        String profile = request.getParameter("profile");
-        String semester = request.getParameter("semester");
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
         String faculty = request.getParameter("faculty");
+        String semester = request.getParameter("semester");
+        String username = request.getParameter("username");
+        String password1 = request.getParameter("password1");
 
-        User user = new User(id, fullname, email, username, password, role, profile, semester, faculty);
-        userDao.updateUser(user);
-        response.sendRedirect("user-list");
+        String email = request.getParameter("email");
+        String role = "User";
+        String fullname = first_name + last_name;
+
+        try {
+            Part pic_part = null;
+            pic_part = request.getPart("image");
+            if (pic_part == null) {
+                String fileName = "static/user/profile/defult.png";
+                User newUser = new User(fullname, email, username, password1, role, fileName, semester, faculty);
+                userDao.insertUser(newUser);
+                response.sendRedirect("LoginServlet");
+
+            } else {
+                String fileName = "static/user/profile/" + username + ".png";
+                String contextPath = new File("").getAbsolutePath();
+                String imageSavePath = "/home/ram/Downloads/javaproject/V2/web" + File.separator + fileName;
+                File fileSaveDir = new File(imageSavePath);
+                System.out.println(imageSavePath);
+                pic_part.write(imageSavePath + File.separator);
+                User newUser = new User(fullname, email, username, password1, role, fileName, semester, faculty);
+                userDao.insertUser(newUser);
+                response.sendRedirect("userprofile?id="+id);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
@@ -170,11 +200,12 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("user-list");
 
     }
-    static String RandGeneratedStr(){
+
+    static String RandGeneratedStr() {
         char[] chars = "abcdefghijklmnopqrstuvwxyzABSDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
         Random r = new Random(System.currentTimeMillis());
-        char[]id = new char[8];
-        for (int i = 0;  i < 8;  i++) {
+        char[] id = new char[8];
+        for (int i = 0; i < 8; i++) {
             id[i] = chars[r.nextInt(chars.length)];
         }
         return new String(id);

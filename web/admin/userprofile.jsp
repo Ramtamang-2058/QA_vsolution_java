@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Vsolution|profile</title>
 
     <!-- Custom fonts for this template -->
     <link href="<%=request.getContextPath()%>/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -97,43 +97,43 @@
       </div>
 
       <div class="profile-card-social">
-        <a href="https://www.facebook.com/iaMuhammedErdem" class="profile-card-social__item facebook" target="_blank">
+        <a href="#" class="profile-card-social__item facebook" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-facebook"></use></svg>
           </span>
         </a>
 
-        <a href="https://twitter.com/iaMuhammedErdem" class="profile-card-social__item twitter" target="_blank">
+        <a href="#" class="profile-card-social__item twitter" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
           </span>
         </a>
 
-        <a href="https://www.instagram.com/iamuhammederdem" class="profile-card-social__item instagram" target="_blank">
+        <a href="#" class="profile-card-social__item instagram" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-instagram"></use></svg>
           </span>
         </a>
 
-        <a href="https://www.behance.net/iaMuhammedErdem" class="profile-card-social__item behance" target="_blank">
+        <a href="#" class="profile-card-social__item behance" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-behance"></use></svg>
           </span>
         </a>
 
-        <a href="https://github.com/muhammederdem" class="profile-card-social__item github" target="_blank">
+        <a href="#" class="profile-card-social__item github" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-github"></use></svg>
           </span>
         </a>
 
-        <a href="https://codepen.io/JavaScriptJunkie" class="profile-card-social__item codepen" target="_blank">
+        <a href="#" class="profile-card-social__item codepen" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-codepen"></use></svg>
           </span>
         </a>
 
-        <a href="http://muhammederdem.com.tr/" class="profile-card-social__item link" target="_blank">
+        <a href="#" class="profile-card-social__item link" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-link"></use></svg>
           </span>
@@ -148,13 +148,15 @@
     </div>
 
     <div class="profile-card-message js-message">
-      <form class="profile-card-form">
+      <form class="profile-card-form" action="sendmessage" method="post">
+          <input type="hidden" value="${user.id}" name="sender"><!-- sender id -->
+          <input type="hidden" value="${usr.id}" name="receiver">
         <div class="profile-card-form__container">
-          <textarea placeholder="Say something..."></textarea>
+            <textarea name="message" placeholder="Say something..."></textarea>
         </div>
 
         <div class="profile-card-form__bottom">
-          <button class="profile-card__button button--blue js-message-close">
+          <button class="profile-card__button button--blue">
             Send
           </button>
 

@@ -22,7 +22,7 @@
         <meta name="author" content="">
 
         <title>Home</title>
-        <jsp:include page="../header.jsp" />
+        <%@include file="../header.jsp" %>
 
     </head>
 
@@ -31,17 +31,17 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
             <c:if test="${user.role == 'Admin'}">
-                <%@ include file = "../adminSidebar.jsp" %>
+                <%@ include file = "adminSidebar.jsp" %>
             </c:if>
             <c:if test="${user.role == 'User'}">
-                <%@ include file = "../sidebar.jsp" %>
+                <%@ include file = "sidebar.jsp" %>
             </c:if>
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
                 <div id="content">
-                    <jsp:include page="../navbar.jsp" />
+                    <%@include file="../navbar.jsp" %>
                     <!-- Begin Page Content -->
                     <style>
                         * {
@@ -418,40 +418,29 @@
                                         </form>
                                     </div>
 
-                                    <a href="new" action="/new"><div class="messageSender__bottom">
-                                            <div class="messageSender__option">
+                                    <div class="messageSender__bottom">
+                                        <a href="new-answer" action="/new-answer"> <div class="messageSender__option">
                                                 <h3>photo</h3>
                                                 <span style="color: green" class="material-icons">camera</span>
-                                            </div>
-                                    </a>
-                                    <a href="new" action="/new">
-                                        <div class="messageSender__option">
-                                            <h3>Post</h3>
-                                            <span style="color: green" class="material-icons"> send</span>
-                                        </div>
-                                    </a>
+                                            </div></a>
+                                        <a href="new-answer" action="/new-answer"> <div class="messageSender__option">
+                                                <h3>Post</h3>
+                                                <span style="color: green" class="material-icons"> send</span>
+                                            </div></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- message sender ends -->
-
-
-                            <c:forEach var="question" items="${listQuestion}">  
-                                <!-- post starts -->
+                                <!-- message sender ends -->
+                                <br>
+                                <h3 class="btn btn-success btn-sm btn-flat">Question</h3>
                                 <div class="post">
+
                                     <div class="post__top">
-                                        <a href="userprofile?id=${question.created_by}" action="/userprofile?id=${question.created_by}">
-                                         <img
-                                            class="user__avatar post__avatar"
-                                            src="<%=request.getContextPath()%>/<c:out value="${question.profile}" />"
-                                            alt=""
-                                            />
-                                        </a>
+
                                         <div class="post__topInfo">
                                             <h3><c:out value="${question.user}" /></h3>
                                             <c:if test="${question.created_by == user.id}">
                                                 <a href="edit-question?id=<c:out value='${question.id}' />" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
-                                            </c:if>
-                                            <p><c:out value="${question.created_date}" /></p>
+                                            </c:if> <p><c:out value="${question.created_date}" /></p>
                                         </div>
                                     </div>
 
@@ -460,70 +449,76 @@
                                     </div>
 
                                     <div class="post__image">
-                                        <img src="<%=request.getContextPath()%>/<c:out value="${question.image}" />" alt="" />
+                                        <img src="<%=request.getContextPath()%>/${question.image}" alt="" />
                                     </div>
 
-                                    <div class="post__options">
-                                        <div class="post__option">
-                                            <span class="material-icons"> thumb_up </span>
-                                            <p>Like</p>
-                                        </div>
-
-                                        <a href="listAnswerByQuestion?id=${question.id}" action="/listAnswerByQuestion?id=${question.id}"> <div class="post__option">
-                                                <span class="material-icons"> chat_bubble_outline </span>
-                                                <p>Answers</p>
-                                            </div></a>
-
-                                        <div class="post__option">
-                                            <span class="material-icons"> near_me </span>
-                                            <p>Share</p>
-                                        </div>
-                                    </div>
                                 </div>
-                            </c:forEach>
-                            <!-- post ends -->
+                                <br>
+                                <h3 class="btn btn-success btn-sm btn-flat">Answers</h3>
+                                <c:forEach var="answer" items="${listAnswer}">  
+                                    <!-- post starts -->
+                                    <div class="post">
+                                        <div class="post__top">
+
+                                            <div class="post__topInfo">
+                                                <h3><c:out value="${answer.user}" /></h3>
+                                                <c:if test="${answer.created_by == user.id}">
+                                                    <a href="edit-question?id=<c:out value='${answer.id}' />" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
+                                                </c:if> <p><c:out value="${answer.created_date}" /></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="post__bottom">
+                                            ${answer.answer}
+                                        </div>
+
+                                        <div class="post__image">
+                                            <img src="<%=request.getContextPath()%>/${answer.image}" alt="" />
+                                        </div>
+
+                                    </div>
+                                </c:forEach>
+                                <!-- post ends -->
+
+                            </div>
+                            <!-- feed ends -->
+
 
                         </div>
-                        <!-- feed ends -->
+
 
 
                     </div>
-
-
-
                 </div>
+                <!-- /.container-fluid -->
+
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+
+
 
         </div>
-        <!-- End of Main Content -->
+        <!-- End of Content Wrapper -->
 
+        <script>
+            function myFunction() {
+                var input = document.getElementById("Search");
+                var filter = input.value.toLowerCase();
+                var nodes = document.getElementsByClassName('post');
 
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-    <script>
-        function myFunction() {
-            var input = document.getElementById("Search");
-            var filter = input.value.toLowerCase();
-            var nodes = document.getElementsByClassName('post');
-
-            for (i = 0; i < nodes.length; i++) {
-                if (nodes[i].innerText.toLowerCase().includes(filter)) {
-                    nodes[i].style.display = "block";
-                } else {
-                    nodes[i].style.display = "none";
+                for (i = 0; i < nodes.length; i++) {
+                    if (nodes[i].innerText.toLowerCase().includes(filter)) {
+                        nodes[i].style.display = "block";
+                    } else {
+                        nodes[i].style.display = "none";
+                    }
                 }
             }
-        }
-    </script>
-    <jsp:include page="../footer.jsp" /></div>
-
-<jsp:include page="../logout.jsp" />
-<!-- Bootstrap core JavaScript-->
-<jsp:include page="../scripts.jsp" />
-
+        </script>
+        <%@include  file="../footer.jsp" %></div>
+        <%@include file="../logout.jsp" %>
+    <!-- Bootstrap core JavaScript-->
+    <%@include file="../scripts.jsp" %>
 </body>
 
 </html>

@@ -6,11 +6,14 @@
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminQestionServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/model/Login.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/config/DBConnection.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/ResetPassword.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/MessageDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminUserServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/nbproject/build-impl.xml</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/NewPassword.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/dao/AnswerDao.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AnswerServlet.java</file>
+            <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/AdminHome.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/UserHome.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/MessageServlet.java</file>
             <file>file:/home/ram/Downloads/javaproject/V2/src/java/com/view/CategoryServlet.java</file>

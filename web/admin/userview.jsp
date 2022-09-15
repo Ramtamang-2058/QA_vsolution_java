@@ -90,8 +90,8 @@
                                             <td><c:out value="${question.created_date}" /></td>
                                             <td><c:out value="${question.edited_date}" /></td>
                                             <td>
-                                                <a href="#" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
-                                                <a href="#" class='btn btn-danger btn-sm delete btn-flat'><i class='fa fa-trash'></i> &nbsp;&nbsp;Delete</a>
+                                                <a href="edit-question" action="/edit-question?id=${question.id}" class='btn btn-success btn-sm btn-flat' ><i class='fa fa-edit'></i> Update</a>
+                                                <a href="question-delete" action="/question-delete?id=${question.id}" class='btn btn-danger btn-sm delete btn-flat'><i class='fa fa-trash'></i> &nbsp;&nbsp;Delete</a>
       </td>                                 </td>
                                       </c:forEach>
 

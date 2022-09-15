@@ -75,12 +75,13 @@ public class QuestionServlet extends HttpServlet {
                     showEditForm(request, response);
                     break;
                 case "/update-question":
-                            System.out.println("fafdasdfsadf");
-
                     updateQuestion(request, response);
                     break;
                 case "/question-list":
                     listQuestion(request, response);
+                    break;
+                case "/myquestions":
+                    userlistQuestion(request, response);
                     break;
                 default:
                     listQuestion(request, response);
@@ -108,6 +109,24 @@ public class QuestionServlet extends HttpServlet {
         request.setAttribute("user", user);
         System.out.println("user detail are:" + user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/user/Home.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void userlistQuestion(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
+        List< Question> listQuestion = questionDao.selectAllQuestions();
+        List< Category> listCategory = categoryDao.selectAllCategories();
+        request.setAttribute("listQuestion", listQuestion);
+        request.setAttribute("listCategory", listCategory);
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        System.out.println("user detail are:" + user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/myquestion.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -165,20 +184,14 @@ public class QuestionServlet extends HttpServlet {
             Part pic_part = null;
             String name = code;
             pic_part = request.getPart("photo");
-            System.out.println("Part is: " + pic_part);
             String fileName = "/static/image/" + name + ".png";
-            System.out.println(code);
             String contextPath = new File("").getAbsolutePath();
             String imageSavePath = "/home/ram/Downloads/javaproject/V2/web" + File.separator + fileName;
             File fileSaveDir = new File(imageSavePath);
-            System.out.println("hi");
-            System.out.println(imageSavePath);
             pic_part.write(imageSavePath + File.separator);
-            System.out.println(imageSavePath);
             Question newQuestion = new Question(text, fileName, created_date, edited_date, category_id, created_by_id, code, semester, subject, faculty);
             questionDao.insertQuestion(newQuestion);
-            System.out.println("there");
-            response.sendRedirect("list");
+            response.sendRedirect("question-list");
         } catch (Exception e) {
             System.out.println(e);
         }

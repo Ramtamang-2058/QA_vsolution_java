@@ -70,12 +70,12 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="myquestions" action="/myquestions">
                     <i class="fa fa-question-circle"></i>
                     <span>My questions</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="myanswer" action="/myanswer">
                     <i class="fa fa-file-word"></i>
                     <span>My answer</span></a>
             </li>

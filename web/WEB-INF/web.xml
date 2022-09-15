@@ -104,6 +104,9 @@
         <url-pattern>/edit-question</url-pattern>
         <url-pattern>/update-question</url-pattern>
         <url-pattern>/question-list</url-pattern>
+        <url-pattern>/myquestions</url-pattern>
+        <url-pattern>/question-delete</url-pattern>
+
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnswerServlet</servlet-name>
@@ -111,10 +114,16 @@
         <url-pattern>/view-Answer</url-pattern>
         <url-pattern>/new-answer</url-pattern>
         <url-pattern>/post-Answer</url-pattern>
+        <url-pattern>/myanswer</url-pattern>
+        <url-pattern>/answer-delete</url-pattern>
+        <url-pattern>/listAnswerByQuestion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
+        <url-pattern>/user-edit</url-pattern>
+        <url-pattern>/user-update</url-pattern>
+        <url-pattern>/user-delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MessageServlet</servlet-name>
@@ -135,6 +144,7 @@
         <url-pattern>/admin-question-list</url-pattern>
         <url-pattern>/admin-question-detail-view</url-pattern>
         <url-pattern>/adminAnswerDetailview</url-pattern>
+        <url-pattern>/question-delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAnswerServlet</servlet-name>
@@ -146,6 +156,7 @@
         <url-pattern>/AdminUserServlet</url-pattern>
         <url-pattern>/admin-user-list</url-pattern>
         <url-pattern>/userprofile</url-pattern>
+        <url-pattern>/sendmessage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ValidateOtp</servlet-name>

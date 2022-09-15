@@ -1940,7 +1940,7 @@ a.btn.disabled,fieldset:disabled a.btn{
     pointer-events:none
 }
 .btn-primary{
-    color:#fff;
+    color:#4e73df;
     background-color:#4e73df;
     border-color:#4e73df
 }

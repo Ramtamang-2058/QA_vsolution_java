@@ -31,6 +31,7 @@ public class AnswerDao {
 
     private static final String SELECT_ANSWERS_BY_ID = "select id, code, image, answer, created_date, edited_date, category_id, created_by_id from vsolution_answer where id =?;";
     private static final String SELECT_ALL_ANSWERS = "select * from vsolution_answer";
+    private static final String SELECT_ANSWERS_BY_QUESTION = "SELECT * FROM vsolution_answer A INNER JOIN users U ON A.created_by_id=U.id WHERE question_id=?;";
     private static final String DELETE_ANSWERS_SQL = "delete from vsolution_answer where id = ?;";
     private static final String UPDATE_ANSWERS_SQL = "update vsolution_answer set image= ?, answer = ?, created_date=?, edited_date=?, category_id =?, created_by_id=? where id = ?;";
     private static final String SELECT_ANSWER= "SELECT * FROM vsolution_answer INNER JOIN users ON vsolution_answer.created_by_id=users.id;";
@@ -116,6 +117,42 @@ public class AnswerDao {
         }
         return answers;
     }
+    
+    
+     public List < Answer > selectAllAnswersByQuestion(int pk) {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List < Answer > answers = new ArrayList < > ();
+        // Step 1: Establishing a Connection
+        try{
+            con = DBConnection.createConnection();
+            // Step 2:Create a statement using connection object
+            preparedStatement = con.prepareStatement(SELECT_ANSWERS_BY_QUESTION);
+            // Step 2:Create a statement using connection object
+            preparedStatement.setInt(1, pk);
+            // Step 3: Execute the query or update query
+            resultSet = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String code = resultSet.getString("code");
+                String text = resultSet.getString("answer");
+                String user = resultSet.getString("fullname");
+                String image = resultSet.getString("image");
+                Date created_date = resultSet.getDate("created_date");
+                Date edited_date = resultSet.getDate("edited_Date");
+                int question_id = resultSet.getInt("question_id");
+                int created_by_id = resultSet.getInt("created_by_id");
+                System.out.println(id + "  " + user+"   "+question_id);
+                answers.add(new Answer(id, code, image, text, user, created_date, edited_date, question_id, created_by_id));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return answers;
+    }
+    
 
     public boolean deleteAnswer(int id) throws SQLException {
         boolean rowDeleted = false;

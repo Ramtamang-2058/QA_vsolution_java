@@ -6,11 +6,14 @@ package com.view;
 
 import com.dao.CategoryDao;
 import com.dao.UserDao;
+import com.dao.MessageDao;
 import com.model.Category;
+import com.model.Message;
 import com.model.User;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -32,11 +35,13 @@ import javax.servlet.http.Part;
 public class AdminUserServlet extends HttpServlet {
     private UserDao userDao;
     private CategoryDao categoryDao;
+    private MessageDao messageDao;
 
     @Override
     public void init() {
         userDao = new UserDao();
         categoryDao = new CategoryDao();
+        messageDao = new MessageDao();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -70,6 +75,9 @@ public class AdminUserServlet extends HttpServlet {
                     break;
                 case "/admin-user-list":
                     listUser(request, response);
+                    break;
+                case "/sendmessage":
+                    insertMessage(request, response);
                     break;
                 default:
                     listUser(request, response);
@@ -108,7 +116,7 @@ public class AdminUserServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User existingUser = userDao.selectUser(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/new-users.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Register.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
 
@@ -156,7 +164,19 @@ public class AdminUserServlet extends HttpServlet {
             System.out.println(e);
         }
     }
-
+    
+    private void insertMessage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        Date created_date = new Date(System.currentTimeMillis());
+        Date edited_date = new Date(System.currentTimeMillis());
+        String text = request.getParameter("message");
+        int send_by_id = Integer.parseInt(request.getParameter("sender"));
+        int receive_by_id = Integer.parseInt(request.getParameter("receiver"));
+        Message newMessage = new Message(text, created_date, edited_date, receive_by_id, send_by_id);
+        messageDao.insertMessage(newMessage);
+      response.sendRedirect("userprofile?id="+send_by_id);
+    }
+    
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ParseException {
         int id = Integer.parseInt(request.getParameter("id"));

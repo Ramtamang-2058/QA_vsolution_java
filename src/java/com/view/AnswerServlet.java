@@ -5,6 +5,7 @@
 package com.view;
 
 import com.dao.AnswerDao;
+import com.dao.QuestionDao;
 import com.dao.UserDao;
 import com.model.Answer;
 import com.model.Category;
@@ -36,11 +37,13 @@ public class AnswerServlet extends HttpServlet {
 
     private AnswerDao answerDao;
     private UserDao userDao;
+    private QuestionDao questionDao;
 
     @Override
     public void init() {
         answerDao = new AnswerDao();
         userDao = new UserDao();
+        questionDao = new QuestionDao();
     }
 
     @Override
@@ -76,6 +79,12 @@ public class AnswerServlet extends HttpServlet {
                 case "/view-Answer":
                     listAnswer(request, response);
                     break;
+                case "/myanswer":
+                    userlistAnswer(request, response);
+                    break;
+                case "/listAnswerByQuestion":
+                    listAnswerByQuestion(request, response);
+                    break;
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
@@ -95,6 +104,41 @@ public class AnswerServlet extends HttpServlet {
         request.setAttribute("userName", userName);
         request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllAnswer.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    
+    private void listAnswerByQuestion(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
+        int id = Integer.parseInt(request.getParameter("id"));
+        List< Answer> listAnswer = answerDao.selectAllAnswersByQuestion(id);
+        Question existingQuestion = questionDao.selectQuestion(id);
+        request.setAttribute("listAnswer", listAnswer);
+        request.setAttribute("question", existingQuestion);
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllAnswerByQuestion.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void userlistAnswer(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(10 * 60);
+        String userName = (String) session.getAttribute("User");
+        String password = (String) session.getAttribute("password");
+        User user = userDao.getUser(userName, password);
+        List< Answer> listAnswer = answerDao.selectAllAnswers();
+        request.setAttribute("listAnswer", listAnswer);
+        
+        request.setAttribute("userName", userName);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/myasnwer.jsp");
         dispatcher.forward(request, response);
     }
 
