@@ -52,7 +52,8 @@ Admin panel
 Answer and question list view with crud
 ![image](https://user-images.githubusercontent.com/84068736/190058274-48b66f68-b867-42ec-9dcc-bc9822779e75.png)
 
-Users CRUD admin
+Users CRUD admin.
+Admin can change the users detail and view except their password
 ![image](https://user-images.githubusercontent.com/84068736/190058291-bcc1d277-b6a3-439c-9c01-d07df896bb04.png)
 
 ran.ramtamang@gmail.com
