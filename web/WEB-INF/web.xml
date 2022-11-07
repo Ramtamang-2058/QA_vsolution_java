@@ -144,7 +144,11 @@
         <url-pattern>/admin-question-list</url-pattern>
         <url-pattern>/admin-question-detail-view</url-pattern>
         <url-pattern>/adminAnswerDetailview</url-pattern>
+<<<<<<< HEAD
         <!--<url-pattern>/question-delete</url-pattern>-->
+=======
+<!--         <url-pattern>/question-delete</url-pattern> -->
+>>>>>>> origin
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAnswerServlet</servlet-name>
