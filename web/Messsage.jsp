@@ -28,6 +28,7 @@
             <div class="col-sm-3 col-xs-12">
                 <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
                     <div class="chat-users">
+                        <a href="<%=request.getContextPath()%>/question-list"><button>Back</button></a>
                         <h6>Message</h6>
                         <!--user profile starts here-->
                         <c:forEach var="usr" items="${listUser}">

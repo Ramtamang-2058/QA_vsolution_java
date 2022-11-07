@@ -70,8 +70,8 @@ public class AnswerDao {
         try{
             con = DBConnection.createConnection();
             preparedStatement = con.prepareStatement(INSERT_ANSWERS_SQL);
-            preparedStatement.setString(1, answer.getAnswer());
-            preparedStatement.setString(2, answer.getImage());
+            preparedStatement.setString(2, answer.getAnswer());
+            preparedStatement.setString(1, answer.getImage());
             preparedStatement.setDate(3, answer.getCreatedDate());
             preparedStatement.setDate(4, answer.getEditedDate());
             preparedStatement.setInt(5, answer.getCreated_by());

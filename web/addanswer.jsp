@@ -57,10 +57,10 @@
                         <!-- Page Heading -->
                         <caption>
                             <h1 class="h3 mb-4 text-gray-800">
-                                <c:if test="${answer != null}">
+                                <c:if test="${question != null}">
                                     Edit Answer
                                 </c:if>
-                                <c:if test="${answer == null}">
+                                <c:if test="${question == null}">
                                     Add your Answer ?
                                 </c:if>
                                 </h2>
@@ -73,7 +73,7 @@
                 <!-- End of Main Content --><div class="container col-md-5">
                     <c:if test="${answer == null}">
                         <h1 class="heading" style="color: blue; font-size: 20px;">Ticket ID: <c:out value='${ticket}' /></h1>
-                        <h1 class="heading">Opened Question Ticket</h1>addanswer
+                        <h1 class="heading">Opened Answer Ticket</h1>
                     </c:if>
                           
                         <c:if test="${answer == null}">
@@ -99,11 +99,11 @@
                                     <input name="code" type="hidden" value="<c:out value="${answer.code}"/>"/>
                                 </c:if>
                                 <c:if test="${answer == null}">
-                                   <p>Hello  ma here in insert form</p>
                                     <form class="justify-content-md-cente" action="post-Answer" method="post" enctype="multipart/form-data">
                                         <input name="code" type="hidden" value="<c:out value="${ticket}"/>"/>
                                     </c:if>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <input type="hidden" name="qid" value="${qid}"/>
                                         <input type="hidden" name="id" value="{answer.id}"/>
                                         <input name="created_by" type="hidden" value="${user.id}" required/>
                                     <div class="textarea">

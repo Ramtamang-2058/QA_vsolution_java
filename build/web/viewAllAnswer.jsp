@@ -30,7 +30,7 @@
 
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <<c:if test="${user.role == 'Admin'}">
+            <c:if test="${user.role == 'Admin'}">
                 <%@ include file = "adminSidebar.jsp" %>
             </c:if>
             <c:if test="${user.role == 'User'}">

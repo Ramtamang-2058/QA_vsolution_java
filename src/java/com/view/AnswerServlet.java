@@ -154,6 +154,8 @@ public class AnswerServlet extends HttpServlet {
         request.setAttribute("userName", userName);
         request.setAttribute("user", user);
         System.out.println("Hellow: "+ userName);
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("qid", id);
         request.setAttribute("message", "Question ticket was created successfully.");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/addanswer.jsp");
         dispatcher.forward(request, response);
@@ -167,6 +169,7 @@ public class AnswerServlet extends HttpServlet {
         String password = (String) session.getAttribute("password");
         User user = userDao.getUser(userName, password);
         int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("qid", id);
         System.out.println("user:" + user);
         Answer existingAnswer = answerDao.selectAnswer(id);
         request.setAttribute("userName", userName);
@@ -183,7 +186,7 @@ public class AnswerServlet extends HttpServlet {
         Date created_date = new Date(System.currentTimeMillis());
         Date edited_date = new Date(System.currentTimeMillis());
         String code = request.getParameter("code");
-        int question_id = 2;
+        int question_id = Integer.parseInt(request.getParameter("qid"));
         String text = request.getParameter("answer");
         int created_by_id= Integer.parseInt(request.getParameter("created_by"));
         System.out.println(created_by_id);

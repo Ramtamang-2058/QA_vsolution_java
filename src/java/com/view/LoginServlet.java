@@ -14,22 +14,25 @@ import javax.servlet.http.HttpSession;
  
 import com.model.Login;
 import com.dao.LoginDao;
-import com.dao.UserDao;
-import com.model.User;
-import javax.servlet.annotation.WebServlet;
+import com.secure.Encrypt;
  
 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private Encrypt encrypt = new Encrypt();
+    public void init() {
+        encrypt = new Encrypt();
+    }
     public LoginServlet() {
     }
     @Override
      
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 {
+    try{
     String userName = request.getParameter("username");
-    String password = request.getParameter("password");
-System.out.println("Inside servlet");    
+    String pwd = request.getParameter("password");
+        String password = encrypt.encryptPassword(pwd);
     Login login = new Login();
  
     login.setUserName(userName);
@@ -90,6 +93,10 @@ System.out.println("Inside servlet");
     catch (Exception e2)
     {
         e2.printStackTrace();
+    }
+    }catch(Exception e3){
+        e3.printStackTrace();
+        
     }
 } //End of doPost()
 @Override

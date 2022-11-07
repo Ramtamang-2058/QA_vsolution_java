@@ -6,6 +6,7 @@ package com.view;
 
 import com.dao.UserDao;
 import com.model.User;
+import com.secure.Encrypt;
 import java.io.IOException;
 import java.io.File;
 import java.io.IOException;
@@ -28,15 +29,18 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
 
     private UserDao userDao;
-
+    private Encrypt encrypt = new Encrypt();
     public void init() {
         userDao = new UserDao();
+        encrypt = new Encrypt();
+        
     }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String faculty = request.getParameter("faculty");
@@ -44,7 +48,8 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
-                System.out.println(password1 + "==" + password2);
+        String password = encrypt.encryptPassword(password1);
+        
 
         String email = request.getParameter("email");
         String role = "User";
@@ -56,8 +61,12 @@ public class RegisterServlet extends HttpServlet {
                 pic_part = request.getPart("image");
                 if (pic_part == null) {
                     String fileName = "static/user/profile/defult.png";
-                    User newUser = new User(fullname, email, username, password1, role, fileName, semester, faculty);
+//                    String password = encrypt.encryptPassword(password1);
+                   
+
+                    User newUser = new User(fullname, email, username, password, role, fileName, semester, faculty);
                     userDao.insertUser(newUser);
+
                     response.sendRedirect("LoginServlet");
 
                 } else {
@@ -67,8 +76,9 @@ public class RegisterServlet extends HttpServlet {
                     File fileSaveDir = new File(imageSavePath);
                     System.out.println(imageSavePath);
                     pic_part.write(imageSavePath + File.separator);
-                    System.out.println("Hellow");
-                    User newUser = new User(fullname, email, username, password1, role, fileName, semester, faculty);
+//                    String password = encrypt.encryptPassword(password1);
+                    System.out.println(password);
+                    User newUser = new User(fullname, email, username, password, role, fileName, semester, faculty);
                     userDao.insertUser(newUser);
                     response.sendRedirect("LoginServlet");
 
@@ -82,6 +92,8 @@ public class RegisterServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Register.jsp");
             dispatcher.forward(request, response);
         }
+
+  
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

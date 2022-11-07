@@ -419,11 +419,11 @@
                                     </div>
 
                                     <div class="messageSender__bottom">
-                                        <a href="new-answer" action="/new-answer"> <div class="messageSender__option">
+                                        <a href="new-answer?qid=${question.id}" action="/new-answer?id="> <div class="messageSender__option">
                                                 <h3>photo</h3>
                                                 <span style="color: green" class="material-icons">camera</span>
                                             </div></a>
-                                        <a href="new-answer" action="/new-answer"> <div class="messageSender__option">
+                                        <a href="new-answer?id=${question.id}" action="/new-answer"> <div class="messageSender__option">
                                                 <h3>Post</h3>
                                                 <span style="color: green" class="material-icons"> send</span>
                                             </div></a>

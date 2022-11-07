@@ -18,7 +18,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Vsuluion | answer</title>
 
     <!-- Custom fonts for this template-->
     <%@ include file = "header.jsp" %>
@@ -54,11 +54,11 @@
                     <!-- Page Heading -->
                     <caption>
                         <h1 class="h3 mb-4 text-gray-800">
-                                <c:if test="${question != null}">
-                                    Edit Question
+                                <c:if test="${answer != null}">
+                                    Edit Answer
                                 </c:if>
-                                <c:if test="${question == null}">
-                                    Add New Question
+                                <c:if test="${answer == null}">
+                                    Add New Answer
                                 </c:if>
                             </h2>
                         </caption>
