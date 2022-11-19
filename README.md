@@ -1,12 +1,12 @@
 # QA_vsolution_java
 Vsolution helps people ﬁnd the answers they need, when they need them. We're best known for our public Q&A platform that over 100 million people visit every month to ask questions, learn, and share technical knowledge. The Collectives page provides a centralized view of questions and answers and content using tags associated with the organization’s technology. Find links to their website, support channels, and code hosting and social media platforms.
 #Tools and Technology:
-1. Java from basic
+1. Java
 2. Jsp servlet
 3. Mysql Database
 4. JDBC, Tiny mice, Chart js
 5. Apache Tomcat server
-6. Netbeans IDE
+6. Netbeans IDE 15
 
 Vsolution is a knowledge management system for a college and schools. Vsolution is a system for transferring information from one person, group to another. It is a mean for people to exchange knowledge. Vsolution is an application which uses technologies to bring people and ideas and solution to solve the problem and help each other to solve the problems. In this application users can request for register themselves to the college or admin. Here, the user will be able to login only after registering and approved by the admin or college. Students can post, questions and answer, communicate with others for questions and answers, they can ﬁlter the question and answer of speciﬁc course, subject, author, category, semester, date and time etc.
 
